@@ -1,0 +1,20 @@
+[
+{
+  "modid": "indaut",
+  "name": "Inductive Automation 2",
+  "description": "W.I.P.",
+  "version": "0.0.0",
+  "acceptableRemoteVersions": "(,)",
+  "acceptableSaveVersions": "(,)",
+  "acceptedMinecraftVersions": "[1.11.2,1.12)",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["CD4017BE"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "useDependencyInformation": true,
+  "requireMods": ["cd4017be_lib@[5.0.0, 5.1.0)"],
+  "dependencies": ["cd4017be_lib@[5.0.0, 5.1.0)"]
+}
+]
