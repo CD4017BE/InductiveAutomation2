@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import cd4017be.indaut.tileentity.Shaft;
 import cd4017be.lib.util.CoordMap1D;
+import cd4017be.lib.util.Utils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing.Axis;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -17,7 +17,12 @@ public class ShaftStructure {
 	public final CoordMap1D<Shaft> components;
 	private final ArrayList<IKineticInteraction> interactions = new ArrayList<IKineticInteraction>();
 	private boolean reloadInteractions = false, updateStructure = false;
-	public double m = 0, v = 0, s = 0;
+	/**[kg] effective rotation mass */
+	public double m = 0;
+	/**[rot/s = m/s] rotation speed */
+	public double v = 0;
+	/**[rot = m] partial rotation */
+	public double s = 0;
 
 	public ShaftStructure(Shaft owner, NBTTagCompound nbt) {
 		this(owner, Axis.values()[nbt.getByte("ax")]);
@@ -30,7 +35,7 @@ public class ShaftStructure {
 		this.axis = axis;
 		this.updater = owner;
 		this.m = owner.getMass();
-		components.set(key(owner.getPos()), owner);
+		components.set(Utils.coord(owner.getPos(), axis), owner);
 		owner.getInteractions(interactions);
 	}
 
@@ -66,8 +71,8 @@ public class ShaftStructure {
 		v /= m;
 	}
 
-	public void removeShaft(IShaftPart part) {
-		if (components.remove(key(part.pos())) != null) {
+	public void removeShaft(Shaft part) {
+		if (components.remove(Utils.coord(part.getPos(), axis)) != null) {
 			m -= part.getMass();
 			updateStructure = true;
 		}
@@ -122,14 +127,6 @@ public class ShaftStructure {
 
 	public void interactionRemoved() {
 		reloadInteractions = true;
-	}
-
-	public int key(BlockPos pos) {
-		switch(axis) {
-		case X: return pos.getX();
-		case Y: return pos.getY();
-		default: return pos.getZ();
-		}
 	}
 
 	public void writeToNBT(NBTTagCompound nbt) {
