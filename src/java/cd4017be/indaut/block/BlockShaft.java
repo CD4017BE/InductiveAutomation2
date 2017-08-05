@@ -25,8 +25,8 @@ public class BlockShaft extends AdvancedBlock {
 	public static IProperty<Axis> XYZorient = PropertyEnum.create("dir", Axis.class);
 	public static IProperty<Boolean> posConnect = PropertyBool.create("con+"), negConnect = PropertyBool.create("con-");
 
-	public BlockShaft(String id, Material m, int flags, Class<? extends TileEntity> tile) {
-		super(id, m, flags, tile);
+	public BlockShaft(String id, Material m, Class<? extends TileEntity> tile) {
+		super(id, m, 3, tile);
 		setDefaultState(getBlockState().getBaseState().withProperty(XYZorient, Axis.Z));
 	}
 
