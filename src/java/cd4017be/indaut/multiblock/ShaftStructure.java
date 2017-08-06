@@ -129,6 +129,10 @@ public class ShaftStructure {
 		reloadInteractions = true;
 	}
 
+	public void addInteraction(IKineticInteraction kin) {
+		interactions.add(kin);
+	}
+
 	public void writeToNBT(NBTTagCompound nbt) {
 		nbt.setDouble("s", s);
 		nbt.setDouble("v", v);
