@@ -1,5 +1,6 @@
 package cd4017be.indaut;
 
+import cd4017be.indaut.registry.FlyWheelMaterials;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -24,6 +25,7 @@ public class Main {
 	public void preInit(FMLPreInitializationEvent event) {
 		Objects.createBlocks();
 		Objects.createItems();
+		FlyWheelMaterials.register();
 	}
 
 	@Mod.EventHandler
