@@ -2,6 +2,7 @@ package cd4017be.indaut;
 
 import cd4017be.indaut.block.BlockMultiblockPart;
 import cd4017be.indaut.block.BlockShaft;
+import cd4017be.indaut.multiblock.IHeatReservoir;
 import cd4017be.indaut.multiblock.IKineticInteraction;
 import cd4017be.indaut.tileentity.FlyWheel;
 import cd4017be.indaut.tileentity.MultiblockPart;
@@ -20,6 +21,8 @@ public class Objects {
 	
 	@CapabilityInject(IKineticInteraction.class)
 	public static Capability<IKineticInteraction> KINETIC_CAP;
+	@CapabilityInject(IHeatReservoir.class)
+	public static Capability<IHeatReservoir> HEAT_CAP;
 
 	public static BlockShaft shaft;
 	public static BlockShaft shaftHandle;
