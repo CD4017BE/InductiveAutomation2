@@ -35,9 +35,7 @@ public class HeatReservoir {
 		if (check) {
 			World world = tile.getWorld();
 			BlockPos pos = tile.getPos();
-			if (env == null) env = Substances.getEnvFor(world);
 			envTemp = env.getTemp(world, pos);
-			if (T < 0) T = envTemp;
 			envCond = 0;
 			for (EnumFacing s : EnumFacing.VALUES) {
 				int i = s.ordinal();
@@ -65,6 +63,12 @@ public class HeatReservoir {
 			H.addHeat(dQ);
 			T -= dQ / C;
 		}
+	}
+
+	public void initialize(BaseTileEntity tile) {
+		env = Substances.getEnvFor(tile.getWorld());
+		envTemp = env.getTemp(tile.getWorld(), tile.getPos());
+		if (Float.isNaN(T)) T = envTemp;
 	}
 
 	public void save(NBTTagCompound nbt, String k) {
