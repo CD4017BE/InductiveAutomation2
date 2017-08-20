@@ -32,13 +32,21 @@ public class Objects {
 	public static BlockShaft flyWheel;
 	public static BlockMultiblockPart flyWheelPart;
 	public static BlockHeatPipe heatPipe;
-
+	public static OrientedBlock heatSink;
+	public static BaseBlock heatInsulation;
+	public static OrientedBlock stirlingEngine;
+	public static OrientedBlock solidHeater;
+	
 	static void createBlocks() {
 		new DefaultItemBlock((shaft = new BlockShaft("shaft", Material.IRON, Shaft.class)).setBlockBounds(new AxisAlignedBB(.25, .25, 0, .75, .75, 1)).setCreativeTab(tabIndAut));
 		new DefaultItemBlock((shaftHandle = new BlockShaft("shaftHandle", Material.IRON, ShaftHandle.class)).setBlockBounds(new AxisAlignedBB(.25, .25, 0, .75, .75, 1)).setCreativeTab(tabIndAut));
 		new DefaultItemBlock((flyWheel = new BlockShaft("flyWheel", Material.IRON, FlyWheel.class)).setCreativeTab(tabIndAut));
 		flyWheelPart = new BlockMultiblockPart("flyWheelPart", Material.IRON, MultiblockPart.class);
 		new DefaultItemBlock((heatPipe = new BlockHeatPipe("heatPipe", Material.IRON, HeatPipe.class).setSize(0.5)).setCreativeTab(tabIndAut));
+		new DefaultItemBlock((heatSink = OrientedBlock.create("heatSink", Material.IRON, 2, null, Orientation.XY_12_ROT)).setCreativeTab(tabIndAut));
+		new DefaultItemBlock((heatInsulation = new BaseBlock("heatInsulation", Material.ROCK)).setCreativeTab(tabIndAut));
+		new DefaultItemBlock((stirlingEngine = OrientedBlock.create("stirlingEngine", Material.IRON, 2, StirlingEngine.class, Orientation.ALL_AXIS)).setCreativeTab(tabIndAut));
+		new DefaultItemBlock((solidHeater = OrientedBlock.create("solidHeater", Material.ROCK, 2, SolidHeater.class, Orientation.HOR_AXIS)));
 		
 		tabIndAut.item = new ItemStack(shaft);
 	}
