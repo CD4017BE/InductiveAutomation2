@@ -1,26 +1,24 @@
 package cd4017be.indaut;
 
-import cd4017be.indaut.block.BlockHeatPipe;
-import cd4017be.indaut.block.BlockMultiblockPart;
-import cd4017be.indaut.block.BlockShaft;
+import cd4017be.indaut.block.*;
 import cd4017be.indaut.multiblock.HeatPipeComp;
 import cd4017be.indaut.multiblock.IHeatReservoir;
 import cd4017be.indaut.multiblock.IKineticInteraction;
-import cd4017be.indaut.tileentity.FlyWheel;
-import cd4017be.indaut.tileentity.HeatPipe;
-import cd4017be.indaut.tileentity.MultiblockPart;
-import cd4017be.indaut.tileentity.Shaft;
-import cd4017be.indaut.tileentity.ShaftHandle;
+import cd4017be.indaut.tileentity.*;
 import cd4017be.lib.DefaultItemBlock;
+import cd4017be.lib.block.BaseBlock;
+import cd4017be.lib.block.OrientedBlock;
+import cd4017be.lib.templates.TabMaterials;
+import cd4017be.lib.util.Orientation;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
 public class Objects {
 
-	public static CreativeTabs tabIndAut;
+	public static TabMaterials tabIndAut;
 	
 	@CapabilityInject(IKineticInteraction.class)
 	public static Capability<IKineticInteraction> KINETIC_CAP;
@@ -41,6 +39,8 @@ public class Objects {
 		new DefaultItemBlock((flyWheel = new BlockShaft("flyWheel", Material.IRON, FlyWheel.class)).setCreativeTab(tabIndAut));
 		flyWheelPart = new BlockMultiblockPart("flyWheelPart", Material.IRON, MultiblockPart.class);
 		new DefaultItemBlock((heatPipe = new BlockHeatPipe("heatPipe", Material.IRON, HeatPipe.class).setSize(0.5)).setCreativeTab(tabIndAut));
+		
+		tabIndAut.item = new ItemStack(shaft);
 	}
 
 	static void createItems() {

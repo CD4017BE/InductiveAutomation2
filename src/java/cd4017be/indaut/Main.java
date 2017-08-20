@@ -1,6 +1,7 @@
 package cd4017be.indaut;
 
 import cd4017be.indaut.registry.FlyWheelMaterials;
+import cd4017be.lib.templates.TabMaterials;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -23,6 +24,7 @@ public class Main {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		Objects.tabIndAut = new TabMaterials(event.getModMetadata().name);
 		Objects.createBlocks();
 		Objects.createItems();
 		FlyWheelMaterials.register();
