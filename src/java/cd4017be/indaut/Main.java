@@ -1,6 +1,9 @@
 package cd4017be.indaut;
 
+import cd4017be.api.recipes.RecipeScriptContext;
 import cd4017be.indaut.registry.FlyWheelMaterials;
+import cd4017be.indaut.registry.Substances;
+import cd4017be.lib.script.ScriptFiles.Version;
 import cd4017be.lib.templates.TabMaterials;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -20,14 +23,18 @@ public class Main {
 	@SidedProxy(serverSide = "cd4017be.indaut.CommonProxy", clientSide = "cd4017be.indaut.ClientProxy")
 	public static CommonProxy proxy;
 
-	public Main() {}
+	public Main() {
+		RecipeScriptContext.scriptRegistry.add(new Version("inductiveAutomation", 1, "/assets/indaut/config/recipes.rcp"));
+	}
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		Objects.tabIndAut = new TabMaterials(event.getModMetadata().name);
+		Objects.tabIndAut = new TabMaterials(ID);
 		Objects.createBlocks();
 		Objects.createItems();
 		FlyWheelMaterials.register();
+		RecipeScriptContext.instance.run("inductiveAutomation.PRE_INIT");
+		proxy.init();
 	}
 
 	@Mod.EventHandler
@@ -35,6 +42,8 @@ public class Main {
 		proxy.registerRenderers();
 	}
 
+	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		Substances.makeDefEnv();
 	}
 }

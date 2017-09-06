@@ -1,8 +1,8 @@
 package cd4017be.indaut.render.gui;
 
 import cd4017be.indaut.tileentity.StirlingEngine;
-import cd4017be.lib.TooltipInfo;
 import cd4017be.lib.render.InWorldUIRenderer.Gui;
+import cd4017be.lib.util.TooltipUtil;
 import net.minecraft.util.math.RayTraceResult;
 
 public class GuiStirlingEngine implements Gui<StirlingEngine> {
@@ -15,7 +15,7 @@ public class GuiStirlingEngine implements Gui<StirlingEngine> {
 
 	@Override
 	public String getTooltip(StirlingEngine tile, int comp) {
-		return TooltipInfo.format("stirlingEngine.mult", tile.mult);
+		return TooltipUtil.format("stirlingEngine.mult", tile.mult);
 	}
 
 }

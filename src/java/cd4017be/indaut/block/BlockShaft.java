@@ -3,6 +3,7 @@ package cd4017be.indaut.block;
 import cd4017be.lib.block.AdvancedBlock;
 import cd4017be.lib.util.Orientation;
 import cd4017be.lib.util.Utils;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -23,10 +24,10 @@ import net.minecraft.world.World;
 public class BlockShaft extends AdvancedBlock {
 
 	public static IProperty<Axis> XYZorient = PropertyEnum.create("dir", Axis.class);
-	public static IProperty<Boolean> posConnect = PropertyBool.create("con+"), negConnect = PropertyBool.create("con-");
+	public static IProperty<Boolean> negConnect = PropertyBool.create("con_"), posConnect = PropertyBool.create("con");
 
-	public BlockShaft(String id, Material m, Class<? extends TileEntity> tile) {
-		super(id, m, 3, tile);
+	public BlockShaft(String id, Material m, SoundType sound, Class<? extends TileEntity> tile) {
+		super(id, m, sound, 3, tile);
 		setDefaultState(getBlockState().getBaseState().withProperty(XYZorient, Axis.Z));
 	}
 

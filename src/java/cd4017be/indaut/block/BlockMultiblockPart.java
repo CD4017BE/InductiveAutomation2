@@ -3,6 +3,7 @@ package cd4017be.indaut.block;
 import cd4017be.indaut.tileentity.MultiblockPart;
 import cd4017be.lib.block.AdvancedBlock;
 import cd4017be.lib.property.PropertyBlockMimic;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -19,8 +20,9 @@ public class BlockMultiblockPart extends AdvancedBlock {
 
 	public static final PropertyBool linked = PropertyBool.create("link");
 
-	public BlockMultiblockPart(String id, Material m, Class<? extends TileEntity> tile) {
-		super(id, m, 2, tile);
+	public BlockMultiblockPart(String id, Material m, SoundType sound, Class<? extends TileEntity> tile) {
+		super(id, m, sound, 2, tile);
+		setDefaultState(getBlockState().getBaseState().withProperty(linked, false));
 	}
 
 	@Override
@@ -29,11 +31,29 @@ public class BlockMultiblockPart extends AdvancedBlock {
 	}
 
 	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState();
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return 0;
+	}
+
+	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+		TileEntity te = world.getTileEntity(pos);
+		if (te instanceof MultiblockPart)
+			return state.withProperty(linked, ((MultiblockPart)te).isLinked);
+		return state;
+	}
+
+	@Override
 	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		TileEntity te = world.getTileEntity(pos);
 		if (te instanceof MultiblockPart) {
 			MultiblockPart part = (MultiblockPart)te;
-			if (part.link != null)
+			if (part.isLinked)
 				return ((IExtendedBlockState)state).withProperty(PropertyBlockMimic.instance, part.storedBlock);
 		}
 		return state;

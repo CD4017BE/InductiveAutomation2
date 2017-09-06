@@ -13,13 +13,14 @@ public class ShaftHandle extends Shaft {
 
 	@Override
 	public void update() {
-		if (checkNeighbors) checkInteractions();
+		boolean check = checkNeighbors;
 		super.update();
+		if (check) checkInteractions();
 	}
 
 	@Override
 	public void getInteractions(ArrayList<IKineticInteraction> list) {
-		if (checkNeighbors) checkInteractions();
+		if (checkNeighbors && world != null) checkInteractions();
 		for (IKineticInteraction kin : interactions)
 			if (kin != null) list.add(kin);
 	}

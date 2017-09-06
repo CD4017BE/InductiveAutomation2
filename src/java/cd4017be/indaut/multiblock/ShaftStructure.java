@@ -36,6 +36,7 @@ public class ShaftStructure {
 		this.updater = owner;
 		this.m = owner.getMass();
 		components.set(Utils.coord(owner.getPos(), axis), owner);
+		owner.structure = this;
 		owner.getInteractions(interactions);
 	}
 
@@ -74,6 +75,7 @@ public class ShaftStructure {
 	public void removeShaft(Shaft part) {
 		if (components.remove(Utils.coord(part.getPos(), axis)) != null) {
 			m -= part.getMass();
+			if (updater == part) updater = null;
 			updateStructure = true;
 		}
 	}
@@ -88,7 +90,9 @@ public class ShaftStructure {
 				if (components.get(i) == null) {
 					new ShaftStructure(this, min, i - 1);
 					i = min = components.getMin();
+					updater = null;
 				}
+			if (this.updater.structure != this) this.updater = null;
 			updateStructure = false;
 			reloadInteractions = true;
 		}
@@ -100,6 +104,7 @@ public class ShaftStructure {
 		
 		double dt = 0.05F, ds = v * dt;
 		if (client || interactions.isEmpty()) {
+			v += 0.001F;//TODO just for testing: remove!
 			s += ds;//just simulate constant rotation speed
 			if (s > 1F) s -= Math.floor(s);
 		} else {
@@ -136,6 +141,7 @@ public class ShaftStructure {
 	public void writeToNBT(NBTTagCompound nbt) {
 		nbt.setDouble("s", s);
 		nbt.setDouble("v", v);
+		nbt.setByte("ax", (byte)axis.ordinal());
 	}
 
 	//################# client side only rendering stuff #################

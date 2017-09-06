@@ -14,6 +14,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class FlyWheel extends CircularMultiblock {
 
+	public FlyWheel() {super();}
+	public FlyWheel(IBlockState state) {super(state);}
+
 	@Override
 	protected Block multiblockPart() {
 		return Objects.flyWheelPart;
@@ -42,7 +45,7 @@ public class FlyWheel extends CircularMultiblock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getModel() {
-		return String.format("flywheel(%.1f", Math.round(R * 2F) / 2F - 0.5F);
+		return String.format("flyWheel(%d)", Math.round(R * 2F) * 8 - 8);
 	}
 
 }

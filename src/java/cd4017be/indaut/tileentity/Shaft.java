@@ -25,15 +25,18 @@ public class Shaft extends BaseTileEntity implements INeighborAwareTile, ITickab
 
 	public static double BASE_MASS = 1000;
 	
-	protected boolean checkNeighbors;
+	protected boolean checkNeighbors = true;
 	public ShaftStructure structure;
 
 	public Shaft() {}
-	public Shaft(IBlockState state) {super(state);}
+	public Shaft(IBlockState state) {
+		super(state);
+		structure = new ShaftStructure(this, state.getValue(BlockShaft.XYZorient));
+	}
 
 	@Override
 	public void update() {
-		if (structure == null) structure = new ShaftStructure(this, getBlockState().getValue(BlockShaft.XYZorient));
+		if (structure == null) new ShaftStructure(this, getBlockState().getValue(BlockShaft.XYZorient));
 		if (checkNeighbors) {
 			TileEntity te = Utils.neighborTile(this, EnumFacing.getFacingFromAxis(AxisDirection.NEGATIVE, structure.axis));
 			if (te instanceof Shaft) structure.addShaft((Shaft)te);
@@ -86,6 +89,18 @@ public class Shaft extends BaseTileEntity implements INeighborAwareTile, ITickab
 	@SideOnly(Side.CLIENT)
 	public String getModel() {
 		return "shaft";
+	}
+
+	@Override
+	public void onChunkUnload() {
+		super.onChunkUnload();
+		if (structure != null) structure.removeShaft(this);
+	}
+
+	@Override
+	public void invalidate() {
+		super.invalidate();
+		if (structure != null) structure.removeShaft(this);
 	}
 
 }

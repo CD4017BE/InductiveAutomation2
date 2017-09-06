@@ -21,8 +21,14 @@ public class ClientProxy extends CommonProxy {
 	public ShaftRenderer shaftRenderer;
 
 	@Override
+	public void init() {
+		SpecialModelLoader.setMod("indaut");
+	}
+
+	@Override
 	public void registerRenderers() {
 		super.registerRenderers();
+		
 		BlockItemRegistry.registerRender(heatInsulation);
 		BlockItemRegistry.registerRender(heatSink);
 		BlockItemRegistry.registerRender(flyWheel);

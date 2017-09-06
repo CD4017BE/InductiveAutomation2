@@ -2,6 +2,8 @@ package cd4017be.indaut.registry;
 
 import java.util.HashMap;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -13,6 +15,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import cd4017be.api.recipes.RecipeAPI;
 import cd4017be.api.recipes.RecipeAPI.IRecipeHandler;
@@ -21,6 +24,7 @@ import cd4017be.indaut.Objects;
 import cd4017be.indaut.multiblock.IHeatReservoir;
 import cd4017be.indaut.physics.GasState;
 import cd4017be.indaut.physics.Substance;
+import cd4017be.indaut.physics.ThermodynamicUtil;
 import cd4017be.lib.script.Parameters;
 import cd4017be.lib.templates.IPipe;
 import cd4017be.lib.templates.IPipe.Cover;
@@ -40,6 +44,27 @@ public class Substances implements IRecipeHandler {
 	public static final HashMap<Material, BlockEntry> materials = new HashMap<Material, BlockEntry>();
 	/** Heat resistance of blocks used as cover (no cover = air) */
 	public static final HashMap<IBlockState, BlockEntry> blocks = new HashMap<IBlockState, BlockEntry>();
+
+	public static void makeDefEnv() {
+		FMLLog.log("InductiveAutomation2", Level.INFO, "Custom thermal environment properties registered for %d dimensions.", environments.size());
+		if (defaultEnv == null) {
+			FMLLog.log("InductiveAutomation2", Level.WARN, "No default thermal environment properties registered! FIX YOUR CONFIG !!!\nCreating environment default with fallback values.");
+			ResourceLocation loc = new ResourceLocation("indaut:air");
+			Substance s = Substance.REGISTRY.getObject(loc);
+			if (s == null) {
+				FMLLog.log("InductiveAutomation2", Level.WARN, "No default air substance registered!\nCreating air substance with fallback values.");
+				s = new Substance("air");
+				s.setRegistryName(loc);
+				GameRegistry.register(s);
+			}
+			defaultEnv = new Environment(s, ThermodynamicUtil.Pn, 270, 10, 1);
+		}
+		FMLLog.log("InductiveAutomation2", Level.INFO, "Custom thermal block properties registered for %d block materials and %d block states.", materials.size(), blocks.size());
+		if (def_block == null) {
+			FMLLog.log("InductiveAutomation2", Level.WARN, "No default thermal block properties registered! FIX YOUR CONFIG !!!\nCreating block default with fallback values.");
+			def_block = new BlockEntry(1F);
+		}
+	}
 
 	public static void init(ConfigConstants cfg) {
 		RecipeAPI.Handlers.put(SUBST, instance);

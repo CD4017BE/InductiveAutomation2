@@ -105,7 +105,7 @@ public class HeatPipe extends MultiblockTile<HeatPipeComp, HeatPipeStructure> im
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getModuleState(int m) {
-		return (T)Boolean.valueOf(comp.canConnect((byte)m));
+		return (T)Byte.valueOf(comp.canConnect((byte)m) ? (byte)0 : (byte)-1);
 	}
 
 	@Override

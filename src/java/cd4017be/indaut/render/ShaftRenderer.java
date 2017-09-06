@@ -5,9 +5,11 @@ import java.util.HashMap;
 import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
 
+import cd4017be.indaut.Main;
 import cd4017be.indaut.multiblock.ShaftStructure;
 import cd4017be.indaut.tileentity.Shaft;
 import cd4017be.lib.render.IModeledTESR;
+import cd4017be.lib.render.SpecialModelLoader;
 import cd4017be.lib.render.Util;
 import cd4017be.lib.render.model.IntArrayModel;
 import cd4017be.lib.render.model.ModelContext;
@@ -19,6 +21,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
@@ -36,7 +39,7 @@ public class ShaftRenderer extends TileEntitySpecialRenderer<Shaft> implements I
 	
 	@Override
 	public void renderTileEntityAt(Shaft te, double x, double y, double z, float partialTicks, int destroyStage) {
-		if (te.structure.lastRendered < Util.RenderFrame) {
+		if (te.structure != null && te.structure.lastRendered < Util.RenderFrame) {
 			BlockPos pos = te.getPos();
 			renderStructure(te.getWorld(), te.structure, x - pos.getX(), y - pos.getY(), z - pos.getZ(), partialTicks * 0.05F);
 		}
@@ -55,7 +58,7 @@ public class ShaftRenderer extends TileEntitySpecialRenderer<Shaft> implements I
 		Util.moveAndOrientToBlock(x + pos.getX(), y + pos.getY(), z + pos.getZ(), struc.axis == Axis.Z ? Orientation.N : struc.axis == Axis.Y ? Orientation.Bn : Orientation.W);
 		GlStateManager.rotate(360F * ((float)struc.s + (float)struc.v * t), 0, 0, 1);
 		
-		bindTexture(texture);
+		bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 		VertexBuffer render = Tessellator.getInstance().getBuffer();
 		render.begin(GL11.GL_QUADS, IntArrayModel.FORMAT);
 		int z0 = struc.components.getMin();
@@ -75,26 +78,29 @@ public class ShaftRenderer extends TileEntitySpecialRenderer<Shaft> implements I
 		IntArrayModel model = modelCache.get(name);
 		if (model != null) return model;
 		try {
-			modelGenerator.run(baseScript, name);
+			model = SpecialModelLoader.loadTESRModel(Main.ID, "shafts." + name);
+			//modelGenerator.run(baseScript, name);
 		} catch (Exception e) {
+			model = new IntArrayModel(0);
 			//In case of crash: log error but still try to create a model out of the vertices that survived.
 			FMLLog.log("InductiveAutomation ShaftRenderer", Level.ERROR, e, "creating model for \"%s\" failed:", name);
 		}
-		model = new IntArrayModel(modelGenerator);
+		//model = new IntArrayModel(modelGenerator);
 		modelCache.put(name, model);
 		return model;
 	}
 
 	@Override
 	public void bakeModels(IResourceManager manager) {
+		modelCache.clear();
+		/*
 		modelGenerator = new ModelContext(new ResourceLocation("indaut", "models/tesr/"));
 		try {
 			baseScript = modelGenerator.getOrLoad("shafts", manager);
-			modelCache.clear();
 		} catch (Exception e) {
 			baseScript = null;
 			FMLLog.log("InductiveAutomation ShaftRenderer", Level.ERROR, e, "loading script failed: ");
-		}
+		}*/
 	}
 
 }
