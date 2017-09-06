@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "orient=n": { "model": "indaut:_stirling_engine" },
+        "orient=s": { "model": "indaut:_stirling_engine#s" },
+        "orient=w": { "model": "indaut:_stirling_engine#w" },
+        "orient=e": { "model": "indaut:_stirling_engine#e" },
+        "orient=bn": { "model": "indaut:_stirling_engine#bn" },
+        "orient=tn": { "model": "indaut:_stirling_engine#tn" },
+		"inventory": { "model": "indaut:_stirling_engine" }
+    }
+}

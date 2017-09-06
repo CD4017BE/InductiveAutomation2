@@ -1,0 +1,4 @@
+{textures = ["indaut:block/heat_insulation"]; dependencies = ["util"];}
+main() {
+	util.cube([0,0,0,0,0,0]#);
+}

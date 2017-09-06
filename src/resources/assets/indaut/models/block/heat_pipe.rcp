@@ -1,0 +1,28 @@
+{textures = ["indaut:block/heat_pipe0", "indaut:block/heat_pipe1"];}
+core() {
+	 Loc Q = [4,4,4,12,12,12]#, T = [0,0,8,8]#;
+	 for (F:["u-v", "u+v", "uv-", "uv+", "-uv", "+uv"]) {add(rect(Q, T, F));}
+}
+conP() {
+	Loc Q = [4,4,0,12,12,4]#, T = [8,8,12,16]#;
+	add(rect(Q, [0,8,8,16]#, "uv-N"),
+		rect(Q, T, "u-v"),
+		rect(Q, T, "u+v"),
+		rect(Q, T, "-uv"),
+		rect(Q, T, "+uv"));
+}
+conB() {
+	Loc Q = [2,2,0,14,14,4]#, T = [12,0,16,12]#;
+	add(rect(Q, [2,2,14,14]#, "uv-N", 1),
+		rect(Q, T, "u-v"),
+		rect(Q, T, "u+v"),
+		rect(Q, T, "-uv"),
+		rect(Q, T, "+uv"));
+}
+item() {
+	core();
+	conB();
+	scale(-1,1,-1);
+	translate(1,0,1);
+	conP();
+}

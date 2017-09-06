@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "link=true": { "model": "indaut:_null" },
+		"link=false": { "model": "indaut:fly_wheel_part" }
+    }
+}

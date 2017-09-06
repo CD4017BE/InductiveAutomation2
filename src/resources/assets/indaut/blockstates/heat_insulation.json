@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"normal": { "model": "indaut:_heat_insulation" },
+		"inventory": { "model": "indaut:_heat_insulation" }
+	}
+}

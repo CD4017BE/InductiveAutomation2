@@ -1,0 +1,9 @@
+{
+	"variants": {
+		"orient=n" : { "model": "indaut:_solid_heater" },
+		"orient=s" : { "model": "indaut:_solid_heater#s" },
+		"orient=w" : { "model": "indaut:_solid_heater#w" },
+		"orient=e" : { "model": "indaut:_solid_heater#e" },
+		"inventory": { "model": "indaut:_solid_heater" }
+	}
+}

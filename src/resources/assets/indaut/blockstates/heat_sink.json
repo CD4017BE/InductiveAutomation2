@@ -1,0 +1,17 @@
+{
+    "variants": {
+        "orient=n": { "model": "indaut:_heatsink" },
+        "orient=s": { "model": "indaut:_heatsink#s" },
+        "orient=w": { "model": "indaut:_heatsink#w" },
+        "orient=e": { "model": "indaut:_heatsink#e" },
+        "orient=bn": { "model": "indaut:_heatsink#bn" },
+        "orient=bs": { "model": "indaut:_heatsink#bs" },
+        "orient=bw": { "model": "indaut:_heatsink#bw" },
+        "orient=be": { "model": "indaut:_heatsink#be" },
+        "orient=tn": { "model": "indaut:_heatsink#tn" },
+        "orient=ts": { "model": "indaut:_heatsink#ts" },
+        "orient=tw": { "model": "indaut:_heatsink#tw" },
+        "orient=te": { "model": "indaut:_heatsink#te" },
+		"inventory": { "model": "indaut:_heatsink" }
+    }
+}

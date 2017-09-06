@@ -1,0 +1,4 @@
+{textures = ["indaut:block/solid_heater_front", "indaut:block/solid_heater_sides", "indaut:block/solid_heater_bot", "indaut:block/solid_heater_top"]; dependencies = ["util"];}
+main() {
+	util.cube([2,3,0,1,1,1]#);
+}

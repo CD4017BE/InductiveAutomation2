@@ -1,0 +1,7 @@
+VERSION = 1;
+
+PRE_INIT() {
+	add("flywheel", "blockIron", 7860);
+	add("flywheel", "blockGold", 19320);
+	add("flywheel", "blockDiamond", 3510);
+}

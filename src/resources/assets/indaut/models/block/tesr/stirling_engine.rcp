@@ -1,0 +1,10 @@
+{textures = ["indaut:block/stirling_engine_piston1", "indaut:block/stirling_engine_piston2"];}
+piston() {
+	Loc Q = [-8,-8,-1,8,8,1]#, T0 = [0,0,16,16]#, T1 = [0,0,16,2]#;
+	add(rect(Q, T0, "uv-", 0),
+		rect(Q, T0, "uv+", 0),
+		rect(Q, T1, "u-v", 1),
+		rect(Q, T1, "u+v", 1),
+		rect(Q, T1, "-uv", 1),
+		rect(Q, T1, "+uv", 1));
+}

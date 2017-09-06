@@ -1,0 +1,18 @@
+{
+	variants = {
+		"normal": { "model": "indaut:_heat_pipe.core" },
+		"cb0": { "model": "indaut:_heat_pipe.conP#bn" },
+		"cb1": { "model": "indaut:_heat_pipe.conB#bn" },
+		"ct0": { "model": "indaut:_heat_pipe.conP#tn" },
+		"ct1": { "model": "indaut:_heat_pipe.conB#tn" },
+		"cn0": { "model": "indaut:_heat_pipe.conP#n" },
+		"cn1": { "model": "indaut:_heat_pipe.conB#n" },
+		"cs0": { "model": "indaut:_heat_pipe.conP#s" },
+		"cs1": { "model": "indaut:_heat_pipe.conB#s" },
+		"cw0": { "model": "indaut:_heat_pipe.conP#w" },
+		"cw1": { "model": "indaut:_heat_pipe.conB#w" },
+		"ce0": { "model": "indaut:_heat_pipe.conP#e" },
+		"ce1": { "model": "indaut:_heat_pipe.conB#e" },
+		"inventory": { "model": "indaut:_heat_pipe.item" }
+	}
+}

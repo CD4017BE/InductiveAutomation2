@@ -1,0 +1,48 @@
+{textures = ["indaut:block/shaft1", "indaut:block/handle", "indaut:block/wheel0", "indaut:block/wheel1"];}
+R = 3; !shaft radius
+D = 1.2432; !octagon edge size
+shaft() {
+	Loc q = rect([R, -D, -8, R, D, 8]#, [0, 0, 16, 8]#, "+vu");
+	for(i:8){
+		Loc j = (i - 4) / 4, c = 1 - j * j * 0.25;
+		color(c, c, c, 1);
+		rotate(0, 0, 1, 45);
+		add(q);
+	}
+}
+handle() {
+	push(); shaft(); pop();
+	Loc h = 1.6, r = 8, d = D * 0.5;
+	Loc P = [R, -D, -h]#, Px = [r, -d, -h]#, Py = [R, D, -h]#, Pz = [R, -D, h]#, Pxy = [r, d, -h]#, Pxz = [r, -d, h]#;
+	Loc F0 = rect([r, -d, -h, r, d, h]#, [0, 8, 16, 16]#, "+vu");
+	Loc F1 = quad([P, 0, 8]#, [Py, 16, 8]#, [Pxy, 16, 0]#, [Px, 0, 0]#, "xyzuv");
+	Loc F2 = quad([P, 0, 8]#, [Px, 0, 0]#, [Pxz, 8, 0]#, [Pz, 8, 8]#, "xyzuv");
+	texIdx(1);
+	for(i:8){
+		rotate(0, 0, 1, 45);
+		add(F0, F1, F2);
+		scale(1, -1, -1);
+		add(F1, F2);
+		scale(1, -1, -1);
+	}
+}
+flyWheel(r2) {
+	push(); shaft(); pop();
+	Loc h = 8 / (1 + 16 / r2), h1 = (h + 8) / 2, r1 = r2 * 0.75, d1 = r1 / R * D, d2 = r2 / R * D;
+	Loc Q = [R, -D, -h, r1, D, h]#, T = [0, 0, 16, 16]#;
+	Loc Fc = [
+		rect(Q, T, "vu-"),
+		rect(Q, T, "vU+"),
+		rect(Q, T, "v-u"),
+		rect(Q, T, "v+U"),
+		rect([r1, -d1, -h1, r2, d1, h1]#, [0, 0, 16, 12]#, "-uv", 1),
+		rect([r1, -d2, -h1, r2, d2, h1]#, [0, 0, 16, 12]#, "+uv", 1),
+		quad([r1, -d1, -h1, 0, 12]#, [r1, d1, -h1, 0, 16]#, [r2, d2, -h1, 16, 16]#, [r2, -d2, -h1, 16, 12]#, "xyzuv", 1),
+		quad([r1, -d1, h1, 0, 12]#, [r2, -d2, h1, 16, 12]#, [r2, d2, h1, 16, 16]#, [r1, d1, h1, 0, 16]#, "xyzuv", 1)
+	];
+	texIdx(2);
+	for(i:8){
+		rotate(0, 0, 1, 45);
+		add(Fc);
+	}
+}

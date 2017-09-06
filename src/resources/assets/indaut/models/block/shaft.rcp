@@ -1,0 +1,41 @@
+{dependencies = ["tesr.shafts"]; textures = ["indaut:block/shaft"];}
+init() {textures = conc(textures, tesr.shafts.textures);}
+con(t) {
+	Loc Tf = [1, 0, 15, 14]#, Ts = [1, 14, 15, 16]#;
+	if (t < 2) {
+		Loc Q = [0, 0, 0, 16, 16, 2]#;
+		add(rect(Q, Tf, "uV-N"),
+			rect(Q, Tf, "uV+"),
+			rect(Q, Ts, "-Uv"),
+			rect(Q, Ts, "+Uv"),
+			rect(Q, Ts, "u-v"),
+			rect(Q, Ts, "u+v"));
+	}
+	if (t % 2 == 0) {
+		Loc Q = [0, 0, 14, 16, 16, 16]#;
+		add(rect(Q, Tf, "uV-"),
+			rect(Q, Tf, "uV+S"),
+			rect(Q, Ts, "-Uv"),
+			rect(Q, Ts, "+Uv"),
+			rect(Q, Ts, "u-v"),
+			rect(Q, Ts, "u+v"));
+	}
+}
+item() {
+	push(); con(0); pop();
+	texIdx(1);
+	translate(8, 8, 8);
+	tesr.shafts.shaft();
+}
+item_handle() {
+	push(); con(0); pop();
+	texIdx(1);
+	translate(8, 8, 8);
+	tesr.shafts.handle();
+}
+item_wheel() {
+	push(); con(0); pop();
+	texIdx(1);
+	translate(8, 8, 8);
+	tesr.shafts.flyWheel(8);
+}

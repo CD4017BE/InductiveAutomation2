@@ -1,0 +1,17 @@
+{
+    "variants": {
+        "con=false,con_=false,dir=x": { "model": "indaut:_shaft.con(0)#W" },
+		"con=true,con_=false,dir=x": { "model": "indaut:_shaft.con(1)#W" },
+		"con=false,con_=true,dir=x": { "model": "indaut:_shaft.con(2)#W" },
+		"con=true,con_=true,dir=x": { "model": "indaut:_shaft.con(3)#W" },
+		"con=false,con_=false,dir=y": { "model": "indaut:_shaft.con(0)#Bn" },
+		"con=true,con_=false,dir=y": { "model": "indaut:_shaft.con(1)#Bn" },
+		"con=false,con_=true,dir=y": { "model": "indaut:_shaft.con(2)#Bn" },
+		"con=true,con_=true,dir=y": { "model": "indaut:_shaft.con(3)#Bn" },
+		"con=false,con_=false,dir=z": { "model": "indaut:_shaft.con(0)" },
+		"con=true,con_=false,dir=z": { "model": "indaut:_shaft.con(1)" },
+		"con=false,con_=true,dir=z": { "model": "indaut:_shaft.con(2)" },
+		"con=true,con_=true,dir=z": { "model": "indaut:_shaft.con(3)" },
+		"inventory": { "model": "indaut:_shaft.item_handle()" }
+    }
+}
