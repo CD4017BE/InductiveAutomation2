@@ -1,16 +1,21 @@
 package cd4017be.indaut.tileentity;
 
+import java.util.List;
+
 import cd4017be.lib.block.AdvancedBlock.INeighborAwareTile;
+import cd4017be.lib.block.AdvancedBlock.ITilePlaceHarvest;
 import cd4017be.lib.block.BaseTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.math.BlockPos;
 
-public class MultiblockPart extends BaseTileEntity implements INeighborAwareTile {
+public class MultiblockPart extends BaseTileEntity implements INeighborAwareTile, ITilePlaceHarvest {
 
 	public CircularMultiblock link;
 	public double r, m, v;
@@ -35,14 +40,8 @@ public class MultiblockPart extends BaseTileEntity implements INeighborAwareTile
 	}
 
 	@Override
-	public void invalidate() {
-		super.invalidate();
-		unlink();
-	}
-
-	@Override
-	public void onChunkUnload() {
-		super.onChunkUnload();
+	protected void clearData() {
+		super.clearData();
 		unlink();
 	}
 
@@ -86,6 +85,14 @@ public class MultiblockPart extends BaseTileEntity implements INeighborAwareTile
 	@Override
 	public void neighborTileChange(BlockPos src) {
 		neighborBlockChange(null, src);
+	}
+
+	@Override
+	public void onPlaced(EntityLivingBase entity, ItemStack item) {}
+
+	@Override
+	public List<ItemStack> dropItem(IBlockState state, int fortune) {
+		return storedBlock.getBlock().getDrops(world, pos, storedBlock, fortune);
 	}
 
 }
