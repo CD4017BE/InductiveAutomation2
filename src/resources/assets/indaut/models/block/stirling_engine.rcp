@@ -1,19 +1,19 @@
-{textures = ["indaut:block/stirling_engine_con", "indaut:block/stirling_engine_in", "indaut:block/stirling_engine_side"];}
+{textures = ["indaut:block/stirling_engine_con", "indaut:block/stirling_engine_con", "indaut:block/stirling_engine_side"];}
 main() {
 	Loc Q0 = [0,0,0,16,16,3]#, Q1 = [0,0,13,16,16,16]#, Q2 = [2,2,3,14,14,13]#,
-		T0 = [0,0,16,16]#, T1 = [0,0,16,3]#, T2 = [0,13,16,0]#, T3 = [2,3,14,13]#;
+		T0 = [0,0,16,16]#, T1 = [0,0,16,3]#, T2 = [0,13,16,16]#, T3 = [2,3,14,13]#;
 	add(rect(Q0, T0, "uv-N", 0),
 		rect(Q0, T0, "uv+", 1),
-		rect(Q0, T1, "u-vB", 2),
-		rect(Q0, T1, "u+vT", 2),
-		rect(Q0, T1, "-uvW", 2),
-		rect(Q0, T1, "+uvE", 2));
+		rect(Q0, T2, "u-VB", 2),
+		rect(Q0, T2, "u+VT", 2),
+		rect(Q0, T2, "-uVW", 2),
+		rect(Q0, T2, "+uVE", 2));
 	add(rect(Q1, T0, "uv-", 1),
 		rect(Q1, T0, "uv+S", 0),
-		rect(Q1, T2, "u-vB", 2),
-		rect(Q1, T2, "u+vT", 2),
-		rect(Q1, T2, "-uvW", 2),
-		rect(Q1, T2, "+uvE", 2));
+		rect(Q1, T1, "u-VB", 2),
+		rect(Q1, T1, "u+VT", 2),
+		rect(Q1, T1, "-uVW", 2),
+		rect(Q1, T1, "+uVE", 2));
 	add(rect(Q2, T3, "u-v", 2),
 		rect(Q2, T3, "u+v", 2),
 		rect(Q2, T3, "-uv", 2),

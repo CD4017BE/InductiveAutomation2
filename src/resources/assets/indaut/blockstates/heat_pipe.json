@@ -1,6 +1,7 @@
 {
 	variants = {
-		"normal": { "model": "indaut:_heat_pipe.core" },
+		"normal": { "model": "indaut:heat_pipe" },
+		"base": { "model": "indaut:_heat_pipe.core" },
 		"cb0": { "model": "indaut:_heat_pipe.conP#bn" },
 		"cb1": { "model": "indaut:_heat_pipe.conB#bn" },
 		"ct0": { "model": "indaut:_heat_pipe.conP#tn" },

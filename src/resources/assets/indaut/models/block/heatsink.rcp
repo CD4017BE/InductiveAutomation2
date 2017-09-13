@@ -1,4 +1,4 @@
-{textures = ["indaut:block/heat_sink0", "indaut:block/heat_sink1"];}
+{textures = ["indaut:block/copper_plate", "indaut:block/heat_sink"];}
 main() {
 	Loc Q = [0,0,0,16,16,4]#, T0 = [0,0,16,16]#, T1 = [0,0,16,4]#;
 	add(rect(Q, T0, "uv-N", 0),
@@ -10,8 +10,8 @@ main() {
 	Q = [1,0,4,3,16,14]#; T0 = [0,4,16,14]#; T1 = [6,14,16,16]#;
 	Loc finn = [
 		rect(Q, [0,14,16,16]#, "vu+", 1),
-		rect(Q, T0, "-uV", 1),
-		rect(Q, T0, "+uV", 1),
+		rect(Q, T0, "-uv", 1),
+		rect(Q, T0, "+uv", 1),
 		rect(Q, T1, "v-U", 1),
 		rect(Q, T1, "v+U", 1)
 	];
