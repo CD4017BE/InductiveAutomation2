@@ -39,7 +39,7 @@ public class ClientProxy extends CommonProxy {
 		BlockItemRegistry.registerRender(solidHeater);
 		
 		SpecialModelLoader.registerBlockModel(flyWheelPart, BlockMimicModel.instance);
-		SpecialModelLoader.registerBlockModel(heatPipe, new MultipartModel(heatPipe));
+		SpecialModelLoader.registerBlockModel(heatPipe, new MultipartModel(heatPipe).setPipeVariants(2));
 		
 		shaftRenderer = new ShaftRenderer();
 		SpecialModelLoader.instance.tesrs.add(shaftRenderer);

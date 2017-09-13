@@ -88,6 +88,8 @@ public class HeatPipeStructure extends SharedNetwork<HeatPipeComp, HeatPipeStruc
 			HeatPipeComp obj;
 			if (comp.canConnect(i) && (obj = comp.getNeighbor(i)) != null) {
 				add(obj);
+				comp.setCon(EnumFacing.VALUES[i], true);
+				obj.setCon(EnumFacing.VALUES[i^1], true);
 			}
 		}
 		comp.updateCon = false;
@@ -102,9 +104,10 @@ public class HeatPipeStructure extends SharedNetwork<HeatPipeComp, HeatPipeStruc
 			IHeatReservoir hr;
 			if (comp.tile.getCapability(Objects.HEAT_CAP, s) != this) continue;
 			if ((te = comp.tile.getTileOnSide(s)) == null || (hr = te.getCapability(Objects.HEAT_CAP, s.getOpposite())) == null) {
-				dC += env.getCond(world.getBlockState(pos), comp.R());
-			} else if ((i & 1) == 0 && !(hr instanceof HeatPipeStructure)) {
+				dC += env.getCond(world.getBlockState(pos), comp.isCon(s) ? comp.R() : comp.Rp);
+			} else if (!(hr instanceof HeatPipeStructure)) {
 				heatExch.put(SharedNetwork.SidedPosUID(comp.getUID(), i), new HeatExchCon(comp, hr));
+				comp.setCon(s, true);
 			}
 		}
 		comp.heatCond += dC;

@@ -21,10 +21,10 @@ import net.minecraftforge.common.capabilities.Capability;
 
 public class HeatPipe extends MultiblockTile<HeatPipeComp, HeatPipeStructure> implements IInteractiveTile, IModularTile {
 
-	public static float C, R;
+	public static float C = 1000, R = 0.05F, Rp = 100;
 	
 	public HeatPipe() {
-		comp = new HeatPipeComp(this, C, R);
+		comp = new HeatPipeComp(this, C, R, Rp);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class HeatPipe extends MultiblockTile<HeatPipeComp, HeatPipeStructure> im
 		if (world.isRemote) return true;
 		dir = Utils.hitSide(X, Y, Z);
 		byte s = (byte)dir.ordinal();
-		if (player.isSneaking() && item == null) {
+		if (player.isSneaking() && item.isEmpty()) {
 			boolean t = !comp.canConnect(s);
 			comp.setConnect(s, t);
 			comp.updateCon = true;
@@ -74,26 +74,28 @@ public class HeatPipe extends MultiblockTile<HeatPipeComp, HeatPipeStructure> im
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		comp.writeToNBT(nbt, "gas");
+		comp.writeToNBT(nbt, "heat");
 		return super.writeToNBT(nbt);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		comp = HeatPipeComp.readFromNBT(this, nbt, "gas", C, R);
+		comp = HeatPipeComp.readFromNBT(this, nbt, "heat", C, R, Rp);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		comp.con = pkt.getNbtCompound().getByte("con");
+		short c = pkt.getNbtCompound().getShort("con");
+		comp.con = (byte)c;
+		comp.isCon = (byte)(c >> 8);
 		this.markUpdate();
 	}
 
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setByte("con", comp.con);
+		nbt.setShort("con", (short)(comp.con & 0x3f | comp.isCon << 8 & 0x3f00));
 		return new SPacketUpdateTileEntity(getPos(), -1, nbt);
 	}
 
@@ -105,12 +107,12 @@ public class HeatPipe extends MultiblockTile<HeatPipeComp, HeatPipeStructure> im
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getModuleState(int m) {
-		return (T)Byte.valueOf(comp.canConnect((byte)m) ? (byte)0 : (byte)-1);
+		return (T)Byte.valueOf(comp.canConnect((byte)m) && comp.getNeighbor((byte)m) != null ? (byte)0 : comp.isCon(EnumFacing.VALUES[m]) ? (byte)1 : (byte)-1);
 	}
 
 	@Override
 	public boolean isModulePresent(int m) {
-		return comp.canConnect((byte)m);
+		return comp.isCon(EnumFacing.VALUES[m]) || comp.canConnect((byte)m) && comp.getNeighbor((byte)m) != null;
 	}
 
 }
