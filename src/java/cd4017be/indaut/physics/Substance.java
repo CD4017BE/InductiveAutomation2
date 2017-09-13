@@ -2,9 +2,10 @@ package cd4017be.indaut.physics;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.RegistryNamespaced;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.registry.IForgeRegistryEntry.Impl;
 import static cd4017be.indaut.physics.ThermodynamicUtil.*;
+
+import cd4017be.lib.util.TooltipUtil;
 
 public class Substance extends Impl<Substance>{
 
@@ -87,7 +88,7 @@ public class Substance extends Impl<Substance>{
 	}
 
 	public String localizedName() {
-		return I18n.translateToLocal("subst." + name + ".name");
+		return TooltipUtil.translate("subst." + name + ".name");
 	}
 
 }

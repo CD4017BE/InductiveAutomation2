@@ -1,11 +1,16 @@
 package cd4017be.indaut;
 
+import cd4017be.api.automation.AreaProtect;
+import cd4017be.api.recipes.RecipeAPI;
 import cd4017be.api.recipes.RecipeScriptContext;
 import cd4017be.api.recipes.RecipeScriptContext.ConfigConstants;
+import cd4017be.indaut.jetpack.PacketHandler;
 import cd4017be.indaut.registry.FlyWheelMaterials;
 import cd4017be.indaut.registry.Substances;
 import cd4017be.lib.script.ScriptFiles.Version;
 import cd4017be.lib.templates.TabMaterials;
+import net.minecraft.block.BlockMushroom;
+import net.minecraft.item.ItemSeeds;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -32,6 +37,8 @@ public class Main {
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigConstants cfg = new ConfigConstants(RecipeScriptContext.instance.modules.get("inductiveAutomation"));
 		Objects.tabIndAut = new TabMaterials(ID);
+		Objects.tabFluids = new CreativeTabFluids("fluids");
+		Config.loadConfig();
 		Objects.createBlocks();
 		Objects.createItems();
 		Objects.registerCapabilities();
@@ -43,6 +50,12 @@ public class Main {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
+		PacketHandler.register();
+		AreaProtect.register(this);
+		
+		RecipeAPI.createOreDictEntries(ItemSeeds.class, "itemSeeds");
+		RecipeAPI.createOreDictEntries(BlockMushroom.class, "blockMushroom");
+		
 		proxy.registerRenderers();
 	}
 
