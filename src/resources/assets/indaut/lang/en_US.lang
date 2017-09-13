@@ -1,5 +1,12 @@
 #PARSE_ESCAPES
 
+# Item names
+item.cd4017be.rotation_sensor.name=Rotation Sensor §e(%.2fr/s)
+item.cd4017be.thermometer.name=Thermometer §e(%.1fK)
+# tooltips
+item.cd4017be.rotation_sensor.tip=Measures shaft rotations per second.\nSneak-click on §3Shaft§7 to link.\n(§bAutomatedRedstone§7 compatible)
+item.cd4017be.thermometer.tip=Measures temperatures in Kelvin.\nSneak-click on machine or environment block to link.\n(§bAutomatedRedstone§7 compatible)
+
 gui.cd4017be.stirlingEngine.mult=Temperature factor: %.1f
 gui.cd4017be.solidHeater.fuel=Fuel %sJ / %sJ
 gui.cd4017be.solidHeater.burn=Burn rate: %sW

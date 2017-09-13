@@ -28,7 +28,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerRenderers() {
 		super.registerRenderers();
-		
+		//Blocks
 		BlockItemRegistry.registerRender(heatInsulation);
 		BlockItemRegistry.registerRender(heatSink);
 		BlockItemRegistry.registerRender(flyWheel);
@@ -37,6 +37,9 @@ public class ClientProxy extends CommonProxy {
 		BlockItemRegistry.registerRender(shaftHandle);
 		BlockItemRegistry.registerRender(stirlingEngine);
 		BlockItemRegistry.registerRender(solidHeater);
+		//Items
+		BlockItemRegistry.registerRender(rotationSensor);
+		BlockItemRegistry.registerRender(thermometer);
 		
 		SpecialModelLoader.registerBlockModel(flyWheelPart, BlockMimicModel.instance);
 		SpecialModelLoader.registerBlockModel(heatPipe, new MultipartModel(heatPipe).setPipeVariants(2));

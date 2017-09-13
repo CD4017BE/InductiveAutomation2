@@ -3,6 +3,7 @@ package cd4017be.indaut;
 import cd4017be.api.Capabilities.EmptyCallable;
 import cd4017be.api.Capabilities.EmptyStorage;
 import cd4017be.indaut.block.*;
+import cd4017be.indaut.item.*;
 import cd4017be.indaut.multiblock.HeatPipeComp;
 import cd4017be.indaut.multiblock.IHeatReservoir;
 import cd4017be.indaut.multiblock.IKineticInteraction;
@@ -31,6 +32,9 @@ public class Objects {
 	public static Capability<IHeatReservoir> HEAT_CAP;
 	@CapabilityInject(HeatPipeComp.class)
 	public static Capability<HeatPipeComp> HEAT_PIPE_CAP;
+
+	public static ItemRotationSensor rotationSensor;
+	public static ItemThermometer thermometer;
 
 	public static BlockShaft shaft;
 	public static BlockShaft shaftHandle;
@@ -63,6 +67,8 @@ public class Objects {
 	}
 
 	static void createItems() {
+		(rotationSensor = new ItemRotationSensor("rotation_sensor")).setCreativeTab(tabIndAut);
+		(thermometer = new ItemThermometer("thermometer")).setCreativeTab(tabIndAut);
 	}
 
 }
