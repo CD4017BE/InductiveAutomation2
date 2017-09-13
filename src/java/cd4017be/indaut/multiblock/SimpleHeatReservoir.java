@@ -5,7 +5,7 @@ import cd4017be.lib.block.BaseTileEntity;
 public class SimpleHeatReservoir implements IHeatReservoir {
 
 	private final float C, R;
-	public float T;
+	public float T = Float.NaN;
 	private BaseTileEntity tile;
 
 	public SimpleHeatReservoir(BaseTileEntity tile, float C, float R) {

@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 public class HeatReservoir {
 
 	public HeatReservoir(float C, float R) {
-		this.C = C; this.T = -1F;
+		this.C = C; this.T = Float.NaN;
 		Rc = new float[]{R, R, R, R, R, R};
 	}
 
@@ -29,7 +29,7 @@ public class HeatReservoir {
 	public byte con;
 	public boolean check = true;
 	public Environment env;
-	private IHeatReservoir[] ref = new IHeatReservoir[9];
+	private IHeatReservoir[] ref = new IHeatReservoir[12];
 
 	public void update(BaseTileEntity tile) {
 		if (check) {
@@ -47,17 +47,17 @@ public class HeatReservoir {
 					if (!state.getBlock().hasTileEntity(state) || (te = world.getTileEntity(pos1)) == null || (hr = te.getCapability(Objects.HEAT_CAP, s.getOpposite())) == null)
 						envCond += env.getCond(state, Rc[i]);
 				}
-				if ((i & 1) == 0) ref[i >> 1] = hr;
+				ref[i] = hr;
 			}
 			check = false;
 		}
 		if (envCond > C) T = envTemp;
 		else if (envCond > 0) T += (envTemp - T) * envCond / C;
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 6; i++) {
 			IHeatReservoir H = ref[i];
 			if (H == null) continue;
 			if (H.invalid()) {ref[i] = null; check = true; continue;}
-			float R = Rc[i * 2] + H.R();
+			float R = Rc[i] + H.R();
 			final float Rmin = 1F / C + 1F / H.C();
 			final float dQ = (T - H.T()) / (R < Rmin ? Rmin : R);
 			H.addHeat(dQ);
@@ -98,8 +98,8 @@ public class HeatReservoir {
 
 	public IHeatReservoir getCapability(BaseTileEntity tile, EnumFacing side) {
 		int i = side.ordinal();
-		IHeatReservoir hr = ref[i + 3];
-		if (hr == null) ref[i + 3] = hr = new Access(tile, i);
+		IHeatReservoir hr = ref[i + 6];
+		if (hr == null) ref[i + 6] = hr = new Access(tile, i);
 		return hr;
 	}
 
