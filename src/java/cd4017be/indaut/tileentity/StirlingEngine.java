@@ -6,6 +6,7 @@ import cd4017be.indaut.Objects;
 import cd4017be.indaut.multiblock.HeatReservoir;
 import cd4017be.indaut.multiblock.IHeatReservoir;
 import cd4017be.indaut.multiblock.IKineticInteraction;
+import cd4017be.indaut.multiblock.IShaft;
 import cd4017be.indaut.multiblock.SimpleHeatReservoir;
 import cd4017be.indaut.registry.Substances;
 import cd4017be.indaut.registry.Substances.Environment;
@@ -35,7 +36,8 @@ public class StirlingEngine extends InWorldUITile implements IKineticInteraction
 	private final SimpleHeatReservoir cold, hot;
 	private IHeatReservoir conC, conH;
 	private Environment env;
-	public float mult;
+	public IShaft shaft;
+	public float mult = 1;
 	private boolean updateCon = true;
 
 	public StirlingEngine() {
@@ -66,6 +68,11 @@ public class StirlingEngine extends InWorldUITile implements IKineticInteraction
 
 	private IHeatReservoir getEnvHeat(BlockPos pos) {
 		return world.isBlockLoaded(pos) ? new IHeatReservoir.ConstantHeat(env.getTemp(world, pos), env.getCond(world.getBlockState(pos), 0)) : IHeatReservoir.NULL;
+	}
+
+	@Override
+	public void setShaft(IShaft shaft) {
+		this.shaft = shaft;
 	}
 
 	@Override

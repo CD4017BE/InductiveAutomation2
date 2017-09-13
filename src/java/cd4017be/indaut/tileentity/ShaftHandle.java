@@ -22,7 +22,10 @@ public class ShaftHandle extends Shaft {
 	public void getInteractions(ArrayList<IKineticInteraction> list) {
 		if (checkNeighbors && world != null) checkInteractions();
 		for (IKineticInteraction kin : interactions)
-			if (kin != null) list.add(kin);
+			if (kin != null) {
+				list.add(kin);
+				kin.setShaft(structure);
+			}
 	}
 
 	private void checkInteractions() {

@@ -4,6 +4,11 @@ import cd4017be.lib.util.ICachableInstance;
 
 public interface IKineticInteraction extends ICachableInstance {
 	/**
+	 * called upon connection with a shaft
+	 * @param shaft reference to the shaft connected with
+	 */
+	public void setShaft(IShaft shaft);
+	/**
 	 * calculate an estimation for the torque this part applies on the shaft.
 	 * This value doesn't need to be exact, but it shouldn't be greater than the actual force added during work() to prevent bad glitches.
 	 * @param ds [m] the distance the shaft will move during this calculation tick

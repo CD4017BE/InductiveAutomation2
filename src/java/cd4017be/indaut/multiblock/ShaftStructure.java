@@ -10,7 +10,7 @@ import net.minecraft.util.EnumFacing.Axis;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ShaftStructure {
+public class ShaftStructure implements IShaft {
 
 	public Shaft updater;
 	public final Axis axis;
@@ -97,6 +97,7 @@ public class ShaftStructure {
 			reloadInteractions = true;
 		}
 		if (reloadInteractions && !client) {
+			for (IKineticInteraction kin : interactions) kin.setShaft(null);
 			interactions.clear();
 			for (Shaft part : components) part.getInteractions(interactions);
 			reloadInteractions = false;
@@ -104,7 +105,6 @@ public class ShaftStructure {
 		
 		double dt = 0.05F, ds = v * dt;
 		if (client || interactions.isEmpty()) {
-			v += 0.001F;//TODO just for testing: remove!
 			s += ds;//just simulate constant rotation speed
 			if (s > 1F) s -= Math.floor(s);
 		} else {
@@ -136,12 +136,33 @@ public class ShaftStructure {
 
 	public void addInteraction(IKineticInteraction kin) {
 		interactions.add(kin);
+		kin.setShaft(this);
 	}
 
 	public void writeToNBT(NBTTagCompound nbt) {
 		nbt.setDouble("s", s);
 		nbt.setDouble("v", v);
 		nbt.setByte("ax", (byte)axis.ordinal());
+	}
+
+	@Override
+	public double M() {
+		return m;
+	}
+
+	@Override
+	public double v() {
+		return v;
+	}
+
+	@Override
+	public double s() {
+		return s;
+	}
+
+	@Override
+	public Axis ax() {
+		return axis;
 	}
 
 	//################# client side only rendering stuff #################
