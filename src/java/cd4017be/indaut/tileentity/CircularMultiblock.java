@@ -154,15 +154,8 @@ public abstract class CircularMultiblock extends Shaft {
 	}
 
 	@Override
-	public void invalidate() {
-		super.invalidate();
-		for (MultiblockPart part : parts.values()) part.unlink();
-		parts.clear();
-	}
-
-	@Override
-	public void onChunkUnload() {
-		super.onChunkUnload();
+	protected void clearData() {
+		super.clearData();
 		for (MultiblockPart part : parts.values()) part.unlink();
 		parts.clear();
 	}

@@ -92,14 +92,7 @@ public class Shaft extends BaseTileEntity implements INeighborAwareTile, ITickab
 	}
 
 	@Override
-	public void onChunkUnload() {
-		super.onChunkUnload();
-		if (structure != null) structure.removeShaft(this);
-	}
-
-	@Override
-	public void invalidate() {
-		super.invalidate();
+	protected void clearData() {
 		if (structure != null) structure.removeShaft(this);
 	}
 

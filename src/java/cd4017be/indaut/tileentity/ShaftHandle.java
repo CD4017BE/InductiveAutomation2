@@ -45,4 +45,14 @@ public class ShaftHandle extends Shaft {
 		return "handle";
 	}
 
+	@Override
+	protected void clearData() {
+		super.clearData();
+		for (int i = 0; i < interactions.length; i++)
+			if (interactions[i] != null) {
+				interactions[i].setShaft(null);
+				interactions[i] = null;
+			}
+	}
+
 }
