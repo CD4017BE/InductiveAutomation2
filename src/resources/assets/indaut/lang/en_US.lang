@@ -1,0 +1,6 @@
+#PARSE_ESCAPES
+
+gui.cd4017be.stirlingEngine.mult=Temperature factor: %.1f
+gui.cd4017be.solidHeater.fuel=Fuel %sJ / %sJ
+gui.cd4017be.solidHeater.burn=Burn rate: %sW
+gui.cd4017be.solidHeater.temp=Temperature: %.1f °C

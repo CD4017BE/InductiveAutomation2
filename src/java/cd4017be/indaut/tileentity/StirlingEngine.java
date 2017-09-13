@@ -24,7 +24,6 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -32,7 +31,7 @@ import net.minecraftforge.common.capabilities.Capability;
 
 public class StirlingEngine extends InWorldUITile implements IKineticInteraction, INeighborAwareTile, ITickable, ServerPacketReceiver {
 
-	public static float Rwork = 10F, Rx = 0.05F, C = 1000F, loss = 20F, maxMult = 16F;
+	public static float Rwork = 5F, Rx = 0.05F, C = 2000F, loss = 20F, maxMult = 16F;
 	private final SimpleHeatReservoir cold, hot;
 	private IHeatReservoir conC, conH;
 	private Environment env;
@@ -154,8 +153,8 @@ public class StirlingEngine extends InWorldUITile implements IKineticInteraction
 	}
 
 	@Override
-	protected AxisAlignedBB[] getBoxes() {
-		return new AxisAlignedBB[] {new AxisAlignedBB(0, 0, 0, 1, 1, .525)};
+	protected UIElement[] getBoxes() {
+		return new UIElement[] {new UIElement(0, 0, 0, 0, 16, 16, 8.25, 0x33)};
 	}
 
 	@Override

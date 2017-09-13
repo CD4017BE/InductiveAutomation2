@@ -15,7 +15,7 @@ public class GuiStirlingEngine implements Gui<StirlingEngine> {
 
 	@Override
 	public String getTooltip(StirlingEngine tile, int comp) {
-		return TooltipUtil.format("stirlingEngine.mult", tile.mult);
+		return TooltipUtil.format("gui.cd4017be.stirlingEngine.mult", tile.mult);
 	}
 
 }
