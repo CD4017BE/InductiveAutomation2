@@ -1,6 +1,7 @@
 package cd4017be.indaut;
 
 import cd4017be.api.recipes.RecipeScriptContext;
+import cd4017be.api.recipes.RecipeScriptContext.ConfigConstants;
 import cd4017be.indaut.registry.FlyWheelMaterials;
 import cd4017be.indaut.registry.Substances;
 import cd4017be.lib.script.ScriptFiles.Version;
@@ -24,14 +25,17 @@ public class Main {
 	public static CommonProxy proxy;
 
 	public Main() {
-		RecipeScriptContext.scriptRegistry.add(new Version("inductiveAutomation", 1, "/assets/indaut/config/recipes.rcp"));
+		RecipeScriptContext.scriptRegistry.add(new Version("inductiveAutomation", 4, "/assets/indaut/config/recipes.rcp"));
 	}
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		ConfigConstants cfg = new ConfigConstants(RecipeScriptContext.instance.modules.get("inductiveAutomation"));
 		Objects.tabIndAut = new TabMaterials(ID);
 		Objects.createBlocks();
 		Objects.createItems();
+		Objects.registerCapabilities();
+		Substances.init(cfg);
 		FlyWheelMaterials.register();
 		RecipeScriptContext.instance.run("inductiveAutomation.PRE_INIT");
 		proxy.init();

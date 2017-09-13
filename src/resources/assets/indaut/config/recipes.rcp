@@ -1,7 +1,43 @@
-VERSION = 1;
+VERSION = 4;
+
+{
+	!heat transfer resistance for block materials [asCover, asNeighborBlock, environmentMultiplier]
+	Rmat_default =	[2.5, 2.5, 1.0]#;
+	Rmat_IRON =		[0.01, 0.01, 1.0]#;
+	Rmat_GLASS =	[1.0, 1.0, 1.0]#;
+	Rmat_ROCK =		[1.2, 1.2, 1.0]#;
+	Rmat_CLAY =		[1.0, 1.0, 1.0]#;
+	Rmat_GROUND =	[1.5, 1.5, 1.0]#;
+	Rmat_GRASS =	[2.0, 2.0, 1.0]#;
+	Rmat_SAND =		[4.0, 4.0, 1.0]#;
+	Rmat_WOOD =		[5.0, 5.0, 1.0]#;
+	Rmat_PACKED_ICE = [0.4, 0.4, 1.0]#;
+	Rmat_ICE =		[0.5, 0.5, 1.0]#;
+	Rmat_CRAFTED_SNOW = [12.0, 12.0, 1.0]#;
+	Rmat_AIR =		[25.0, 0.0, 10.0]#;
+	Rmat_SNOW =		[15.0, 15.0, 1.0]#;
+	Rmat_CLOTH =	[100.0, 100.0, 1.0]#;
+	Rmat_LAVA =		[2.0, 1.6, 0.5]#;
+	Rmat_WATER =	[1.2, 1.0, 0.25]#;
+}
+DefPressure = 101300; !normal air pressure
 
 PRE_INIT() {
+	!define a new substance: (name, color[rrggbb], liqDensity[kg/m³], molarMass[g/mol], liqHeatCap[J/kg/K], evapHeat[J/kg], evapTemp[K], oxidizer(optional))
+	add("substance", "air", "fffcfa", 900, 30, 3000, 198000, 80, 0.21);
+	add("substance", "water", "2020ff", 1000, 18, 4186, 2196400, 373);
+	add("substance", "lava", "ffc020", 2500, 40, 3000, 2196400, 4000);
+	
+	!define a dimension's environment: (dimId, substance, pressure[Pa], baseTemp[K], biomeTempMult[K], heatResistance[K/W])
+	!actual temperature is baseTemp + biomeTempMult * (coldTaiga:-0.6, icePlains:0, plains:0.8, jungle:1.2, savanna:1.5, desert:2.4
+	add("environment", nil, "indaut:air", DefPressure, 270, 25, 0.8);
+
 	add("flywheel", "blockIron", 7860);
 	add("flywheel", "blockGold", 19320);
 	add("flywheel", "blockDiamond", 3510);
+}
+
+INIT() {
+	add("heatBlock", it("tile.heat_insulation"), 500);
+	add("heatBlock", it("tile.heat_sink"), 0.005, 0.001, 0.2);
 }
