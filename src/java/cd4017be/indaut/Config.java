@@ -32,7 +32,7 @@ import cd4017be.indaut.tileentity.Farm;
 import cd4017be.indaut.tileentity.GeothermalFurnace;
 import cd4017be.indaut.tileentity.GraviCond;
 import cd4017be.indaut.tileentity.ItemPipe;
-import cd4017be.indaut.tileentity.LiquidPipe;
+import cd4017be.indaut.tileentity.FluidPipe;
 import cd4017be.indaut.tileentity.Magnet;
 import cd4017be.indaut.tileentity.Miner;
 import cd4017be.indaut.tileentity.Pump;
@@ -106,7 +106,7 @@ public class Config {
 		float f = 1000F;
 		Inventory.ticks = (int)data.getNumber("inventory_ticks", Inventory.ticks);
 		ItemPipe.ticks = (byte)data.getNumber("itemPipe_ticks", ItemPipe.ticks);
-		LiquidPipe.ticks = (byte)data.getNumber("fluidPipe_ticks", LiquidPipe.ticks);
+		FluidPipe.ticks = (byte)data.getNumber("fluidPipe_ticks", FluidPipe.ticks);
 		Builder.Energy = f * (float)data.getNumber("Builder_Euse", Builder.Energy / f);
 		Builder.resistor = (float)data.getNumber("Builder_Rwork", Builder.resistor);
 		Builder.eScale = (float)Math.sqrt(1D - 1D / Builder.resistor);

@@ -26,7 +26,7 @@ import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
  *
  * @author CD4017BE
  */
-@JEIPlugin
+//@JEIPlugin TODO reactivate
 public class InductiveAutomationPlugin extends BlankModPlugin {
 
 	@Override

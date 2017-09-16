@@ -37,8 +37,8 @@ public class Main {
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigConstants cfg = new ConfigConstants(RecipeScriptContext.instance.modules.get("inductiveAutomation"));
 		Objects.tabIndAut = new TabMaterials(ID);
-		Objects.tabFluids = new CreativeTabFluids("fluids");
-		Config.loadConfig();
+		//Objects.tabFluids = new CreativeTabFluids("fluids");
+		//Config.loadConfig();
 		Objects.createBlocks();
 		Objects.createItems();
 		Objects.registerCapabilities();

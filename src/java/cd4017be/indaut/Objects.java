@@ -3,7 +3,6 @@ package cd4017be.indaut;
 import cd4017be.api.Capabilities.EmptyCallable;
 import cd4017be.api.Capabilities.EmptyStorage;
 import cd4017be.indaut.block.*;
-import cd4017be.indaut.block.BlockOre.Ore;
 import cd4017be.indaut.item.*;
 import cd4017be.indaut.multiblock.BasicWarpPipe;
 import cd4017be.indaut.multiblock.HeatPipeComp;
@@ -214,7 +213,7 @@ public class Objects {
 		new DefaultItemBlock((heatInsulation = new BaseBlock("heat_insulation", Material.ROCK)).setCreativeTab(tabIndAut));
 		new DefaultItemBlock((stirlingEngine = OrientedBlock.create("stirling_engine", Material.IRON, SoundType.METAL, 3, StirlingEngine.class, PropertyOrientation.ALL_AXIS)).setCreativeTab(tabIndAut));
 		new DefaultItemBlock((solidHeater = OrientedBlock.create("solid_heater", Material.ROCK, SoundType.METAL, 2, SolidHeater.class, PropertyOrientation.HOR_AXIS)).setCreativeTab(tabIndAut));
-		
+		/*
 		new DefaultItemBlock((heatRadiator = TileBlock.create("heatRadiator", Material.IRON, SoundType.METAL, 0)).setCreativeTab(tabIndAut).setHardness(1.5F).setResistance(10F));
 		new DefaultItemBlock((lightShaft = TileBlock.create("lightShaft", Material.GLASS, SoundType.GLASS, 0)).setCreativeTab(tabIndAut).setHardness(1.0F).setResistance(10F));
 		new DefaultItemBlock((wireC = new BlockPipe("wireC", Material.IRON, SoundType.METAL, 0x20)).setCreativeTab(tabIndAut).setHardness(0.5F).setResistance(10F));
@@ -294,18 +293,16 @@ public class Objects {
 		ore.setHarvestLevel("pickaxe", 1, ore.getStateFromMeta(Ore.Copper.ordinal()));
 		ore.setHarvestLevel("pickaxe", 2, ore.getStateFromMeta(Ore.Silver.ordinal()));
 		ore.setHarvestLevel("pickaxe", 1, ore.getStateFromMeta(Ore.Aluminium.ordinal()));
-		
+		*/
 		tabIndAut.item = new ItemStack(shaft);
 	}
 
 	static void createItems() {
 		(rotationSensor = new ItemRotationSensor("rotation_sensor")).setCreativeTab(tabIndAut);
 		(thermometer = new ItemThermometer("thermometer")).setCreativeTab(tabIndAut);
-		
+		/*
 		selectionTool = new ItemSelectionTool("selectionTool");
 		voltMeter = new ItemVoltMeter("voltMeter");
-		rotationSensor = new ItemRotationSensor("rotationSensor");
-		thermometer = new ItemThermometer("thermometer");
 		manometer = new ItemManometer("manometer");
 		energyCell = new ItemEnergyCell("energyCell", Config.Ecap[0]);
 		chisle = new ItemEnergyTool("chisle", Config.Ecap[0], (int)Config.data.getNumber("Chisle_Euse", 25), (float)Config.data.getNumber("Chisle_digSpeed", 16F), 4).setToolClass(new String[]{"pickaxe", "shovel"}, (int)Config.data.getNumber("Chisle_harvestLvl", 3));
@@ -347,6 +344,7 @@ public class Objects {
 		synchronizer = new ItemMachineSynchronizer("synchronizer");
 		(remBlockType = new DefaultItem("remBlockType")).setCreativeTab(tabIndAut);
 		vertexSel = new ItemVertexSel("vertexSel");
+		*/
 	}
 
 	static void createFluids() {
