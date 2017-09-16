@@ -2,7 +2,7 @@ package cd4017be.indaut.block;
 
 import cd4017be.api.automation.AreaProtect;
 import cd4017be.api.automation.ProtectLvl;
-import cd4017be.lib.DefaultBlock;
+import cd4017be.lib.block.BaseBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -27,7 +27,7 @@ import net.minecraft.world.World;
  *
  * @author CD4017BE
  */
-public class BlockUnbreakable extends DefaultBlock {
+public class BlockUnbreakable extends BaseBlock {
 
 	public BlockUnbreakable(String id) {
 		super(id, Material.ROCK);

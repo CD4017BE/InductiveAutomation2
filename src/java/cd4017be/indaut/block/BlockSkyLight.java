@@ -3,7 +3,7 @@ package cd4017be.indaut.block;
 import java.util.Random;
 
 import cd4017be.indaut.Objects;
-import cd4017be.lib.DefaultBlock;
+import cd4017be.lib.block.BaseBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -18,7 +18,7 @@ import net.minecraft.world.World;
  *
  * @author CD4017BE
  */
-public class BlockSkyLight extends DefaultBlock {
+public class BlockSkyLight extends BaseBlock {
 
 	public static Block ID;
 
@@ -35,7 +35,7 @@ public class BlockSkyLight extends DefaultBlock {
 
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-		this.neighborChanged(state, world, pos, this);
+		this.neighborChanged(state, world, pos, this, pos);
 	}
 
 	@Override

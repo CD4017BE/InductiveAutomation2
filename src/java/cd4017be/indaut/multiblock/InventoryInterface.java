@@ -7,6 +7,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
+@Deprecated
 public class InventoryInterface {
 
 

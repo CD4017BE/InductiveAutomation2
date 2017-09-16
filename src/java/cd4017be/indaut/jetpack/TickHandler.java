@@ -1,8 +1,8 @@
 package cd4017be.indaut.jetpack;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
@@ -52,7 +52,7 @@ public class TickHandler {
 	public static void init() {
 		ClientRegistry.registerKeyBinding(keyMode);
 		ClientRegistry.registerKeyBinding(keyOn);
-		FMLCommonHandler.instance().bus().register(instance);
+		MinecraftForge.EVENT_BUS.register(instance);
 	}
 
 	@SubscribeEvent

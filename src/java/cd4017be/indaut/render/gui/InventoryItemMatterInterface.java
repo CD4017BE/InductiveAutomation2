@@ -14,6 +14,7 @@ import net.minecraft.util.text.ITextComponent;
  *
  * @author CD4017BE
  */
+@Deprecated
 public class InventoryItemMatterInterface implements IInventory
 {
 	public final ItemStack[] inventory = new ItemStack[5];
@@ -112,12 +113,6 @@ public class InventoryItemMatterInterface implements IInventory
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) 
-	{
-		return !player.isDead;
-	}
-
-	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
 	{
 		return i != 2;
@@ -169,5 +164,16 @@ public class InventoryItemMatterInterface implements IInventory
 
 	@Override
 	public void clear() {}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isUsableByPlayer(EntityPlayer player) {
+		return !player.isDead;
+	}
 	
 }

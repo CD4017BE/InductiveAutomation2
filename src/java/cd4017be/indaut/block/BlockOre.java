@@ -1,6 +1,6 @@
 package cd4017be.indaut.block;
 
-import cd4017be.lib.DefaultBlock;
+import cd4017be.lib.block.BaseBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -15,7 +15,7 @@ import net.minecraft.util.NonNullList;
  *
  * @author CD4017BE
  */
-public class BlockOre extends DefaultBlock {
+public class BlockOre extends BaseBlock {
 
 	public static enum Ore implements IStringSerializable {
 		Silver("silver"), Copper("copper"), Aluminium("aluminium");

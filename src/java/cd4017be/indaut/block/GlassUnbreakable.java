@@ -2,7 +2,7 @@ package cd4017be.indaut.block;
 
 import cd4017be.api.automation.AreaProtect;
 import cd4017be.api.automation.ProtectLvl;
-import cd4017be.lib.DefaultBlock;
+import cd4017be.lib.block.BaseBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  *
  * @author CD4017BE
  */
-public class GlassUnbreakable extends DefaultBlock {
+public class GlassUnbreakable extends BaseBlock {
 
 	public GlassUnbreakable(String id) {
 		super(id, Material.GLASS);

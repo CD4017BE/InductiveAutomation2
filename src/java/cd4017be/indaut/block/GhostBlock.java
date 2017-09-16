@@ -6,9 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumBlockRenderType;
-import cd4017be.lib.DefaultBlock;
+import cd4017be.lib.block.BaseBlock;
 
-public class GhostBlock extends DefaultBlock {
+public class GhostBlock extends BaseBlock {
 
 	public static Block ID;
 
