@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:solid_fuel_heater" },
 		"orient=n": { "model": "indaut:solid_fuel_heater" },
 		"orient=e": { "model": "indaut:solid_fuel_heater" , "y": 90 },
 		"orient=s": { "model": "indaut:solid_fuel_heater" , "y": 180 },

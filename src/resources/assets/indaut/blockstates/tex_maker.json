@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:tex_maker" },
 		"normal": { "model": "indaut:tex_maker" }
 	}
 }

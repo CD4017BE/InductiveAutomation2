@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:unbr_glass" },
 		"normal": { "model": "indaut:unbr_glass" }
 	}
 }

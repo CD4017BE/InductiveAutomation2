@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:quantum_tank" },
 		"normal": { "model": "indaut:quantum_tank" }
 	}
 }

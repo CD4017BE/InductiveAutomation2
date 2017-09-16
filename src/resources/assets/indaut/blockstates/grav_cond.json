@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:grav_cond" },
 		"normal": { "model": "indaut:grav_cond" }
 	}
 }

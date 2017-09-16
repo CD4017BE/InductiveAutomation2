@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:huge_tank" },
 		"normal": { "model": "indaut:huge_tank" }
 	}
 }

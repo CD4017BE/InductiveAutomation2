@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:detector" },
 		"orient=n": { "model": "indaut:detector" },
 		"orient=e": { "model": "indaut:detector" , "y": 90 },
 		"orient=s": { "model": "indaut:detector" , "y": 180 },

@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:advanced_furnace" },
 		"orient=n": { "model": "indaut:advanced_furnace" },
 		"orient=e": { "model": "indaut:advanced_furnace" , "y": 90 },
 		"orient=s": { "model": "indaut:advanced_furnace" , "y": 180 },

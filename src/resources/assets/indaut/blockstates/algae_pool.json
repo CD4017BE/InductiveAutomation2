@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:algae_pool" },
 		"orient=n": { "model": "indaut:algae_pool" },
 		"orient=e": { "model": "indaut:algae_pool" , "y": 90 },
 		"orient=s": { "model": "indaut:algae_pool" , "y": 180 },

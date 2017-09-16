@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:decomp_cooler" },
 		"normal": { "model": "indaut:decomp_cooler" }
 	}
 }

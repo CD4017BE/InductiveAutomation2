@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:matter_orb" },
 		"normal": { "model": "indaut:matter_orb" }
 	}
 }

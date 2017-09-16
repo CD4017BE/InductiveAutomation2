@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:scsu" },
 		"normal": { "model": "indaut:scsu" }
 	}
 }

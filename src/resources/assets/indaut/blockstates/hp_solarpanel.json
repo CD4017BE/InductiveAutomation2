@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:hp_solarpanel" },
 		"normal": { "model": "indaut:hp_solarpanel" }
 	}
 }

@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:steam_boiler" },
 		"orient=n": { "model": "indaut:steam_boiler" },
 		"orient=e": { "model": "indaut:steam_boiler" , "y": 90 },
 		"orient=s": { "model": "indaut:steam_boiler" , "y": 180 },

@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:fluidvent" },
 		"orient=n": { "model": "indaut:fluidvent" },
 		"orient=e": { "model": "indaut:fluidvent" , "y": 90 },
 		"orient=s": { "model": "indaut:fluidvent" , "y": 180 },

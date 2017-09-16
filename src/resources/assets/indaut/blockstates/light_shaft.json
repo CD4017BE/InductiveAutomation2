@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:light_shaft" },
 		"normal": { "model": "indaut:light_shaft" }
 	}
 }

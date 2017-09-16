@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:pool" },
 		"normal": { "model": "indaut:pool" }
 	}
 }

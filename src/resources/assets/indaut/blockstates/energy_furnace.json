@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:energy_furnace" },
 		"orient=n": { "model": "indaut:energy_furnace" },
 		"orient=e": { "model": "indaut:energy_furnace" , "y": 90 },
 		"orient=s": { "model": "indaut:energy_furnace" , "y": 180 },

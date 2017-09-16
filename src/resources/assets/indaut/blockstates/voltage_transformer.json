@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:voltage_transformer" },
 		"orient=n": { "model": "indaut:voltage_transformer" },
 		"orient=e": { "model": "indaut:voltage_transformer" , "y": 90 },
 		"orient=s": { "model": "indaut:voltage_transformer" , "y": 180 },

@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:auto_crafting" },
 		"normal": { "model": "indaut:auto_crafting" }
 	}
 }

@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:unbr_stone0" },
 		"type=0": { "model": "indaut:unbr_stone0" },
 		"type=1": { "model": "indaut:unbr_stone1" },
 		"type=2": { "model": "indaut:unbr_stone2" },

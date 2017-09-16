@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:massstorage_chest" },
 		"orient=n": { "model": "indaut:massstorage_chest" },
 		"orient=e": { "model": "indaut:massstorage_chest" , "y": 90 },
 		"orient=s": { "model": "indaut:massstorage_chest" , "y": 180 },

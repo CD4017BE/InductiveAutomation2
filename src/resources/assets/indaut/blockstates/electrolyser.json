@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:electrolyser" },
 		"normal": { "model": "indaut:electrolyser" }
 	}
 }

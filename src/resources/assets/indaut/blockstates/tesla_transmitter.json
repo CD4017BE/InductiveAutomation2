@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:tesla_transmitter" },
 		"normal": { "model": "indaut:tesla_transmitter" }
 	}
 }

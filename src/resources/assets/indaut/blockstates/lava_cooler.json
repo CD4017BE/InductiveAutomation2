@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:lava_cooler" },
 		"normal": { "model": "indaut:lava_cooler" }
 	}
 }

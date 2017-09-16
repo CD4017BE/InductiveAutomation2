@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:electriccoil_h" },
 		"orient=n": { "model": "indaut:electriccoil_h" },
 		"orient=e": { "model": "indaut:electriccoil_h" , "y": 90 },
 		"orient=s": { "model": "indaut:electriccoil_h" , "y": 180 },

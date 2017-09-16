@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:electric_compressor" },
 		"orient=n": { "model": "indaut:electric_compressor" },
 		"orient=e": { "model": "indaut:electric_compressor" , "y": 90 },
 		"orient=s": { "model": "indaut:electric_compressor" , "y": 180 },

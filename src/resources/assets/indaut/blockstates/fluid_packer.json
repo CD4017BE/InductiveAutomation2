@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:fluid_packer" },
 		"orient=n": { "model": "indaut:fluid_packer" },
 		"orient=e": { "model": "indaut:fluid_packer" , "y": 90 },
 		"orient=s": { "model": "indaut:fluid_packer" , "y": 180 },

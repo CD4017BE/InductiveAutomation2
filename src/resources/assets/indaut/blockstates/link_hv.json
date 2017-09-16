@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:link_hv" },
 		"orient=n": { "model": "indaut:link_hv" },
 		"orient=e": { "model": "indaut:link_hv" , "y": 90 },
 		"orient=s": { "model": "indaut:link_hv" , "y": 180 },

@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:antimatter_fabricator" },
 		"orient=n": { "model": "indaut:antimatter_fabricator" },
 		"orient=e": { "model": "indaut:antimatter_fabricator" , "y": 90 },
 		"orient=s": { "model": "indaut:antimatter_fabricator" , "y": 180 },

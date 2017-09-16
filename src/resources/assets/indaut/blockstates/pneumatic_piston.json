@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:pneumatic_piston" },
 		"orient=n": { "model": "indaut:pneumatic_piston" },
 		"orient=e": { "model": "indaut:pneumatic_piston" , "y": 90 },
 		"orient=s": { "model": "indaut:pneumatic_piston" , "y": 180 },

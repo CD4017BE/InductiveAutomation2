@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:builder" },
 		"normal": { "model": "indaut:builder" }
 	}
 }

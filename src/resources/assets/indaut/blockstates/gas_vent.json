@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:gasvent" },
 		"orient=n": { "model": "indaut:gasvent" },
 		"orient=e": { "model": "indaut:gasvent" , "y": 90 },
 		"orient=s": { "model": "indaut:gasvent" , "y": 180 },

@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:electric_heater" },
 		"orient=n": { "model": "indaut:electric_heater" },
 		"orient=e": { "model": "indaut:electric_heater" , "y": 90 },
 		"orient=s": { "model": "indaut:electric_heater" , "y": 180 },

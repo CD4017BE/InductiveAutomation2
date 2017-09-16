@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:steam_generator" },
 		"normal": { "model": "indaut:steam_generator" }
 	}
 }

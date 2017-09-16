@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:security" },
 		"orient=n": { "model": "indaut:security" },
 		"orient=e": { "model": "indaut:security" , "y": 90 },
 		"orient=s": { "model": "indaut:security" , "y": 180 },

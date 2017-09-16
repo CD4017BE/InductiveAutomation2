@@ -1,5 +1,6 @@
 {
 	"variants": {
+		"inventory": { "model": "indaut:item_sorter" },
 		"normal": { "model": "indaut:item_sorter" }
 	}
 }
