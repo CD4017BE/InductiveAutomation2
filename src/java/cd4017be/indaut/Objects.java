@@ -58,6 +58,9 @@ public class Objects {
 	public static BaseBlock heatInsulation;
 	public static OrientedBlock stirlingEngine;
 	public static OrientedBlock solidHeater;
+	public static BlockPipe itemPipe;
+	public static BlockPipe fluidPipe;
+	public static BlockPipe warpPipe;
 
 	
 	//Items
@@ -117,9 +120,6 @@ public class Objects {
 	public static BlockPipe wireC;
 	public static BlockPipe wireA;
 	public static BlockPipe wireH;
-	public static BlockPipe liquidPipe;
-	public static BlockPipe itemPipe;
-	public static BlockPipe warpPipe;
 	public static TileBlock SCSU;
 	public static TileBlock OCSU;
 	public static TileBlock CCSU;
@@ -213,15 +213,15 @@ public class Objects {
 		new DefaultItemBlock((heatInsulation = new BaseBlock("heat_insulation", Material.ROCK)).setCreativeTab(tabIndAut));
 		new DefaultItemBlock((stirlingEngine = OrientedBlock.create("stirling_engine", Material.IRON, SoundType.METAL, 3, StirlingEngine.class, PropertyOrientation.ALL_AXIS)).setCreativeTab(tabIndAut));
 		new DefaultItemBlock((solidHeater = OrientedBlock.create("solid_heater", Material.ROCK, SoundType.METAL, 2, SolidHeater.class, PropertyOrientation.HOR_AXIS)).setCreativeTab(tabIndAut));
+		new ItemItemPipe((itemPipe = BlockPipe.create("item_pipe", Material.WOOD, SoundType.WOOD, ItemPipe.class, 3)).setCreativeTab(tabIndAut).setHardness(0.5F));
+		new ItemLiquidPipe((fluidPipe = BlockPipe.create("fluid_pipe", Material.GLASS, SoundType.GLASS, FluidPipe.class, 3)).setCreativeTab(tabIndAut).setHardness(0.5F));
+		new DefaultItemBlock((warpPipe = BlockPipe.create("warp_pipe", Material.IRON, SoundType.METAL, WarpPipe.class, 1)).setCreativeTab(tabIndAut).setHardness(1.0F).setResistance(20F));
 		/*
 		new DefaultItemBlock((heatRadiator = TileBlock.create("heatRadiator", Material.IRON, SoundType.METAL, 0)).setCreativeTab(tabIndAut).setHardness(1.5F).setResistance(10F));
 		new DefaultItemBlock((lightShaft = TileBlock.create("lightShaft", Material.GLASS, SoundType.GLASS, 0)).setCreativeTab(tabIndAut).setHardness(1.0F).setResistance(10F));
 		new DefaultItemBlock((wireC = new BlockPipe("wireC", Material.IRON, SoundType.METAL, 0x20)).setCreativeTab(tabIndAut).setHardness(0.5F).setResistance(10F));
 		new DefaultItemBlock((wireA = new BlockPipe("wireA", Material.IRON, SoundType.METAL, 0x20)).setCreativeTab(tabIndAut).setHardness(0.5F).setResistance(10F));
 		new DefaultItemBlock((wireH = new BlockPipe("wireH", Material.IRON, SoundType.METAL, 0x20)).setCreativeTab(tabIndAut).setHardness(0.5F).setResistance(10F));
-		new ItemLiquidPipe((liquidPipe = new BlockLiquidPipe("liquidPipe", SoundType.GLASS, Material.GLASS, 0x20)).setHardness(0.5F).setCreativeTab(tabIndAut).setResistance(10F));
-		new ItemItemPipe((itemPipe = new BlockItemPipe("itemPipe", Material.WOOD, SoundType.WOOD, 0x20)).setCreativeTab(tabIndAut).setHardness(0.5F).setResistance(10F));
-		new DefaultItemBlock((warpPipe = new BlockPipe("warpPipe", Material.IRON, SoundType.METAL, 0x20)).setCreativeTab(tabIndAut).setHardness(1.0F).setResistance(20F));
 		new ItemESU((SCSU = TileBlock.create("SCSU", Material.IRON, SoundType.METAL, 0x40)).setCreativeTab(tabIndAut).setHardness(1.5F).setResistance(10F));
 		new ItemESU((OCSU = TileBlock.create("OCSU", Material.IRON, SoundType.METAL, 0x40)).setCreativeTab(tabIndAut).setHardness(1.5F).setResistance(10F));
 		new ItemESU((CCSU = TileBlock.create("CCSU", Material.IRON, SoundType.METAL, 0x40)).setCreativeTab(tabIndAut).setHardness(1.5F).setResistance(10F));

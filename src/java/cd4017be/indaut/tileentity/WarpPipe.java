@@ -1,5 +1,7 @@
 package cd4017be.indaut.tileentity;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,19 +10,24 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ITickable;
+
+import java.util.List;
+
 import cd4017be.api.automation.IFluidPipeCon;
 import cd4017be.api.automation.IItemPipeCon;
 import cd4017be.indaut.Objects;
 import cd4017be.indaut.multiblock.BasicWarpPipe;
 import cd4017be.indaut.multiblock.ConComp;
 import cd4017be.indaut.multiblock.WarpPipePhysics;
-import cd4017be.lib.templates.IPipe;
+import cd4017be.lib.block.AdvancedBlock.IInteractiveTile;
+import cd4017be.lib.block.AdvancedBlock.INeighborAwareTile;
+import cd4017be.lib.block.AdvancedBlock.ITilePlaceHarvest;
+import cd4017be.lib.block.MultipartBlock.IModularTile;
 import cd4017be.lib.templates.MultiblockTile;
 import cd4017be.lib.util.Utils;
 
-public class WarpPipe extends MultiblockTile<BasicWarpPipe, WarpPipePhysics> implements IPipe, IItemPipeCon, IFluidPipeCon {
-
-	private Cover cover = null;
+public class WarpPipe extends MultiblockTile<BasicWarpPipe, WarpPipePhysics> implements ITilePlaceHarvest, INeighborAwareTile, IInteractiveTile, ITickable, IModularTile, IItemPipeCon, IFluidPipeCon {
 
 	public WarpPipe() {
 		comp = new BasicWarpPipe(this);
@@ -36,16 +43,7 @@ public class WarpPipe extends MultiblockTile<BasicWarpPipe, WarpPipePhysics> imp
 	@Override
 	public boolean onActivated(EntityPlayer player, EnumHand hand, ItemStack item, EnumFacing dir, float X, float Y, float Z) {
 		if (world.isRemote) return true;
-		if (cover != null) {
-			if (player.isSneaking() && item == null) {
-				this.dropStack(cover.item);
-				cover = null;
-				this.markUpdate();
-				return true;
-			}
-			return false;
-		}
-		dir = this.getClickedSide(X, Y, Z);
+		dir = Utils.hitSide(X, Y, Z);
 		byte s = (byte)dir.getIndex();
 		byte t = comp.con[s];
 		if (t >= 2) {
@@ -55,7 +53,7 @@ public class WarpPipe extends MultiblockTile<BasicWarpPipe, WarpPipePhysics> imp
 				markUpdate();
 				return true;
 			}
-		} else if (player.isSneaking() && item == null) {
+		} else if (player.isSneaking() && item.getCount() == 0) {
 			comp.setConnect(s, t != 0);
 			this.markUpdate();
 			BasicWarpPipe pipe = comp.getNeighbor(s);
@@ -67,12 +65,7 @@ public class WarpPipe extends MultiblockTile<BasicWarpPipe, WarpPipePhysics> imp
 		} 
 		if (player.isSneaking()) return false;
 		else if (t < 2 && ConComp.createFromItem(item, comp, (byte)s)) {
-			if (--item.getCount() <= 0) item = null;
-			player.setHeldItem(hand, item);
-			this.markUpdate();
-			return true;
-		} else if (item != null && (cover = Cover.create(item)) != null) {
-			if (--item.getCount() <= 0) item = null;
+			item.grow(-1);
 			player.setHeldItem(hand, item);
 			this.markUpdate();
 			return true;
@@ -80,23 +73,24 @@ public class WarpPipe extends MultiblockTile<BasicWarpPipe, WarpPipePhysics> imp
 	}
 
 	@Override
+	public void onClicked(EntityPlayer player) {
+	}
+
+	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		comp.writeToNBT(nbt);
-		if (cover != null) cover.write(nbt, "cover");
 		return super.writeToNBT(nbt);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		cover = Cover.read(nbt, "cover");
 		comp = BasicWarpPipe.readFromNBT(this, nbt);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
 		NBTTagCompound nbt = pkt.getNbtCompound();
-		cover = Cover.read(nbt, "cover");
 		byte[] data = nbt.getByteArray("con");
 		if (data.length == 6) System.arraycopy(data, 0, comp.con, 0, 6);
 		comp.hasFilters = nbt.getByte("filt");
@@ -106,7 +100,6 @@ public class WarpPipe extends MultiblockTile<BasicWarpPipe, WarpPipePhysics> imp
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
-		if (cover != null) cover.write(nbt, "cover");
 		byte[] data = new byte[comp.con.length];
 		System.arraycopy(comp.con, 0, data, 0, data.length);
 		nbt.setByteArray("con", data);
@@ -114,29 +107,23 @@ public class WarpPipe extends MultiblockTile<BasicWarpPipe, WarpPipePhysics> imp
 		return new SPacketUpdateTileEntity(getPos(), -1, nbt);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public int textureForSide(byte s) {
-		if (s < 0 || s > 5) return 0;
-		byte t = comp.con[s];
-		if (t == 1) return -1;
-		else if (t > 1) return t - 1 + (comp.hasFilters >> s & 1) * 4;
-		TileEntity te = Utils.getTileOnSide(this, s);
-		return te != null && te.hasCapability(Objects.WARP_PIPE_CAP, EnumFacing.VALUES[s^1]) ? 0 : -1;
+	public <T> T getModuleState(int m) {
+		byte t = comp.con[m];
+		if (t == 1) return (T)Byte.valueOf((byte)-1);
+		else if (t > 1) return (T)Byte.valueOf((byte)(t - 1 + (comp.hasFilters >> m & 1) * 4));
+		TileEntity te = Utils.neighborTile(this, EnumFacing.VALUES[m]);
+		return (T)Byte.valueOf(te != null && te.hasCapability(Objects.WARP_PIPE_CAP, EnumFacing.VALUES[m^1]) ? (byte)0 : (byte)-1);
 	}
 
 	@Override
-	public Cover getCover() {
-		return cover;
-	}
-
-	@Override
-	public void breakBlock() {
-		super.breakBlock();
-		for (int i = 0; i < 6; i++) {
-			ConComp con = comp.network.remConnector(comp, (byte)i);
-			if (con != null) con.onClicked(null, null, null, 0);
-		}
-		if (cover != null) this.dropStack(cover.item);
+	public boolean isModulePresent(int m) {
+		byte t = comp.con[m];
+		if (t == 1) return false;
+		else if (t > 1) return true;
+		TileEntity te = Utils.neighborTile(this, EnumFacing.VALUES[m]);
+		return te != null && te.hasCapability(Objects.WARP_PIPE_CAP, EnumFacing.VALUES[m^1]);
 	}
 
 	@Override
@@ -153,5 +140,19 @@ public class WarpPipe extends MultiblockTile<BasicWarpPipe, WarpPipePhysics> imp
 
 	@Override
 	public ItemStack insert(ItemStack item, EnumFacing side) {return item;}
+
+	@Override
+	public void onPlaced(EntityLivingBase entity, ItemStack item) {
+	}
+
+	@Override
+	public List<ItemStack> dropItem(IBlockState state, int fortune) {
+		List<ItemStack> list = makeDefaultDrops(null);
+		for (int i = 0; i < 6; i++) {
+			ConComp con = comp.network.remConnector(comp, (byte)i);
+			if (con != null) con.dropContent(list);
+		}
+		return list;
+	}
 
 }

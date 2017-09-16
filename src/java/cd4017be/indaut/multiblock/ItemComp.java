@@ -13,7 +13,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import cd4017be.indaut.Objects;
 import cd4017be.indaut.item.PipeUpgradeItem;
 import cd4017be.indaut.multiblock.WarpPipePhysics.IObjLink;
-import cd4017be.lib.ModTileEntity;
+import cd4017be.lib.util.ItemFluidUtil;
 
 public class ItemComp extends ConComp implements IObjLink {
 
@@ -59,18 +59,17 @@ public class ItemComp extends ConComp implements IObjLink {
 
 	@Override
 	public boolean onClicked(EntityPlayer player, EnumHand hand, ItemStack item, long uid) {
-		if (item == null && filter != null) {
+		if (item.getCount() == 0 && filter != null) {
 			item = new ItemStack(Objects.itemUpgrade);
 			item.setTagCompound(PipeUpgradeItem.save(filter));
 			filter = null;
-			((ModTileEntity)pipe.tile).dropStack(item);
+			ItemFluidUtil.dropStack(item, player);
 			pipe.network.reorder(this);
 			pipe.hasFilters &= ~(1 << side);
 			return true;
-		} else if (filter == null && item != null && item.getItem() == Objects.itemUpgrade && item.getTagCompound() != null) {
+		} else if (filter == null && item.getItem() == Objects.itemUpgrade && item.getTagCompound() != null) {
 			filter = PipeUpgradeItem.load(item.getTagCompound());
 			item.grow(-1);
-			if (item.getCount() <= 0) item = null;
 			player.setHeldItem(hand, item);
 			pipe.network.reorder(this);
 			pipe.hasFilters |= 1 << side;
@@ -101,9 +100,8 @@ public class ItemComp extends ConComp implements IObjLink {
 		n = filter.insertAmount(item, acc);
 		if (n == 0) return item;
 		if (n > item.getCount()) n = item.getCount();
-		ItemStack item1 = ItemHandlerHelper.insertItemStacked(acc, item.splitStack(n), false);
-		if (item1 != null) item.grow(item1.getCount());
-		return item.getCount() > 0 ? item : null;
+		item.grow(ItemHandlerHelper.insertItemStacked(acc, item.splitStack(n), false).getCount());
+		return item;
 	}
 
 	public byte getPriority() {

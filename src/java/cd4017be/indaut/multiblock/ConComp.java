@@ -1,7 +1,7 @@
 package cd4017be.indaut.multiblock;
 
-import cd4017be.indaut.block.BlockItemPipe;
-import cd4017be.indaut.block.BlockLiquidPipe;
+import java.util.List;
+
 import cd4017be.indaut.item.ItemItemPipe;
 import cd4017be.indaut.item.ItemLiquidPipe;
 import net.minecraft.entity.player.EntityPlayer;
@@ -71,25 +71,28 @@ public class ConComp {
 	}
 
 	public static boolean createFromItem(ItemStack item, BasicWarpPipe pipe, byte side) {
-		if (item == null || pipe.con[side] >= 2) return false;
+		if (item.getCount() == 0 || pipe.con[side] >= 2) return false;
 		pipe.setConnect(side, false);
 		Item type = item.getItem();
 		ConComp con;
-		if (type instanceof ItemItemPipe && item.getItemDamage() == BlockItemPipe.ID_Injection) {
+		if (type instanceof ItemItemPipe && item.getItemDamage() == 1) {
 			con = new ItemDestination(pipe, side);
 			pipe.con[side] = 2;
-		} else if (type instanceof ItemItemPipe && item.getItemDamage() == BlockItemPipe.ID_Extraction) {
+		} else if (type instanceof ItemItemPipe && item.getItemDamage() == 2) {
 			con = new ItemExtractor(pipe, side);
 			pipe.con[side] = 3;
-		} else if (type instanceof ItemLiquidPipe && item.getItemDamage() == BlockLiquidPipe.ID_Injection) {
+		} else if (type instanceof ItemLiquidPipe && item.getItemDamage() == 1) {
 			con = new FluidDestination(pipe, side);
 			pipe.con[side] = 4;
-		} else if (type instanceof ItemLiquidPipe && item.getItemDamage() == BlockLiquidPipe.ID_Extraction) {
+		} else if (type instanceof ItemLiquidPipe && item.getItemDamage() == 2) {
 			con = new FluidExtractor(pipe, side);
 			pipe.con[side] = 5;
 		} else return false;
 		pipe.network.addConnector(pipe, con);
 		return true;
+	}
+
+	public void dropContent(List<ItemStack> list) {
 	}
 
 }

@@ -1,19 +1,24 @@
 package cd4017be.indaut.tileentity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cd4017be.api.automation.IItemPipeCon;
 import cd4017be.indaut.Objects;
-import cd4017be.indaut.block.BlockItemPipe;
 import cd4017be.indaut.item.ItemItemUpgrade;
 import cd4017be.indaut.item.PipeUpgradeItem;
-import cd4017be.lib.ModTileEntity;
-import cd4017be.lib.templates.IPipe;
+import cd4017be.lib.block.AdvancedBlock.IInteractiveTile;
+import cd4017be.lib.block.AdvancedBlock.INeighborAwareTile;
+import cd4017be.lib.block.AdvancedBlock.ITilePlaceHarvest;
+import cd4017be.lib.block.BaseTileEntity;
+import cd4017be.lib.block.MultipartBlock.IModularTile;
 import cd4017be.lib.templates.LinkedInventory;
 import cd4017be.lib.util.ItemFluidUtil;
 import cd4017be.lib.util.TileAccess;
+import cd4017be.lib.util.Utils;
 import net.minecraft.block.Block;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -34,41 +39,47 @@ import net.minecraftforge.items.ItemHandlerHelper;
  *
  * @author CD4017BE
  */
-public class ItemPipe extends ModTileEntity implements ITickable, IPipe, IItemPipeCon {
+public class ItemPipe extends BaseTileEntity implements ITilePlaceHarvest, INeighborAwareTile, IInteractiveTile, ITickable, IItemPipeCon, IModularTile {
 
 	public static byte ticks = 1;
-	public final LinkedInventory invcap;
+	public final LinkedInventory invcap = new LinkedInventory(1, 64, this::getItem, this::setItem);
 	public ItemStack inventory, last;
 	private PipeUpgradeItem filter = null;
-	private Cover cover = null;
-	private ArrayList<PipeAccess> targets = new ArrayList<PipeAccess>(5);
+	private IItemPipeCon target;
+	private EnumFacing targetSide;
 	private ArrayList<TileAccess> invs = null;
+	private byte type;
 	/** bits[0-13 (6+1)*2]: (side + total) * dir{0:none, 1:in, 2:out, 3:lock/both} */
 	private short flow;
 	private boolean updateCon = true;
 	private byte timer = 0;
 
-	public ItemPipe() {
-		this.invcap = new LinkedInventory(1, (s) -> inventory, (item, s) -> inventory = item);
+	private ItemStack getItem(int i) {
+		return inventory == null ? ItemStack.EMPTY : inventory;
+	}
+
+	private void setItem(ItemStack item, int i) {
+		inventory = item.isEmpty() ? null : item;
 	}
 
 	@Override
 	public void update() {
 		if (world.isRemote) return;
-		int type = this.getBlockMetadata();
 		if (updateCon) this.updateConnections(type);
-		if ((flow & 0x3000) == 0x3000)
+		if ((flow & 0x3000) == 0x3000) {
 			switch(type) {
-			case BlockItemPipe.ID_Injection:
+			case 1:
 				if (inventory != null && (filter == null || filter.active(world.isBlockPowered(pos)))) transferIn();
-				if (inventory != null && !targets.isEmpty() && (filter == null || filter.transfer(inventory))) transfer();
+				if (inventory != null && target != null && (filter == null || filter.transfer(inventory)))
+					inventory = target.insert(inventory, targetSide);
 				break;
-			case BlockItemPipe.ID_Extraction:
+			case 2:
 				timer++;
 				if ((filter == null || filter.active(world.isBlockPowered(pos))) && (timer & 0xff) >= ticks) transferEx();
 			default:
-				if (inventory != null) transfer();
+				if (inventory != null && target != null) inventory = target.insert(inventory, targetSide);
 			}
+		}
 		if (inventory != last) {
 			last = inventory;
 			markUpdate();
@@ -87,13 +98,12 @@ public class ItemPipe extends ModTileEntity implements ITickable, IPipe, IItemPi
 	}
 
 	private void updateConnections(int type) {
-		targets.clear();
 		if (invs != null) invs.clear();
-		else if (type != BlockItemPipe.ID_Transport) invs = new ArrayList<TileAccess>(5);
-		int tp = 0;
+		else if (type != 0) invs = new ArrayList<TileAccess>(5);
 		EnumFacing dir;
 		TileEntity te;
 		ArrayList<ItemPipe> updateList = new ArrayList<ItemPipe>();
+		if (target != null && ((TileEntity)target).isInvalid()) target = null;
 		int lHasIO = getFlowBit(6), nHasIO = 0, lDirIO, nDirIO;
 		short lFlow = flow;
 		for (int i = 0; i < 6; i++) {
@@ -109,17 +119,27 @@ public class ItemPipe extends ModTileEntity implements ITickable, IPipe, IItemPi
 				if (pDirIO == 3) nDirIO = 3;
 				else if ((nDirIO = pHasIO & ~pDirIO) == 3) 
 					nDirIO = lHasIO == 1 && (lDirIO & 1) == 0 ? 2 : lHasIO == 2 && (lDirIO & 2) == 0 ? 1 : 0;
+				if (nDirIO == 1) {
+					if (target == null) {
+						target = pipe;
+						targetSide = dir;
+					} else if (target != pipe) nDirIO = 0;
+				}
 				setFlowBit(i, nDirIO);
 				if (nDirIO != 3) nHasIO |= nDirIO;
-				if (nDirIO == 1) targets.add(new PipeAccess(pipe, dir));
 				updateList.add(pipe);
 			} else if (te instanceof IItemPipeCon) {
 				byte d = ((IItemPipeCon)te).getItemConnectType(i^1);
 				d = d == 1 ? 2 : d == 2 ? 1 : (byte)0;
+				if (d == 1) {
+					if (target == null) {
+						target = (IItemPipeCon)te;
+						targetSide = dir.getOpposite();
+					} else if (target != te) nDirIO = 0;
+				}
 				setFlowBit(i, d);
 				nHasIO |= d;
-				if (d == 1) targets.add(tp++, new PipeAccess((IItemPipeCon)te, dir.getOpposite()));
-			} else if (type != BlockItemPipe.ID_Transport && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, dir.getOpposite())) {
+			} else if (type != 0 && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, dir.getOpposite())) {
 				setFlowBit(i, type);
 				nHasIO |= type;
 				invs.add(new TileAccess(te, dir.getOpposite()));
@@ -133,25 +153,21 @@ public class ItemPipe extends ModTileEntity implements ITickable, IPipe, IItemPi
 		updateCon = false;
 	}
 
-	private void transfer() {
-		for (PipeAccess pipe : targets)
-			if (pipe.te.isInvalid()) updateCon = true;
-			else if ((inventory = pipe.pipe.insert(inventory, pipe.side)) == null) return;
-	}
-
 	private void transferIn() {
 		IItemHandler acc;
 		for (TileAccess inv : invs)
 			if (inv.te.isInvalid() || (acc = inv.te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, inv.side)) == null) updateCon = true;
 			else if (PipeUpgradeItem.isNullEq(filter)) {
 				inventory = ItemHandlerHelper.insertItem(acc, inventory, false);
-				if (inventory == null) break;
+				if (inventory.getCount() <= 0) {
+					inventory = null;
+					break;
+				}
 			} else {
 				int m = filter.insertAmount(inventory, acc);
 				if (m > 0) {
-					ItemStack res = ItemHandlerHelper.insertItem(acc, inventory.splitStack(m), false);
-					if (res != null) inventory.grow(res.getCount());
-					else if (inventory.getCount() <= 0) {
+					inventory.grow(ItemHandlerHelper.insertItem(acc, inventory.splitStack(m), false).getCount());
+					if (inventory.getCount() <= 0) {
 						inventory = null;
 						break;
 					}
@@ -165,7 +181,7 @@ public class ItemPipe extends ModTileEntity implements ITickable, IPipe, IItemPi
 		for (TileAccess inv : invs)
 			if (inv.te.isInvalid() || (acc = inv.te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, inv.side)) == null) updateCon = true;
 			else if (PipeUpgradeItem.isNullEq(filter)) {
-				if (inventory == null) inventory = ItemFluidUtil.drain(acc, -1);
+				if (inventory == null) setItem(ItemFluidUtil.drain(acc, -1), 0);
 				else {
 					int m = inventory.getMaxStackSize() - inventory.getCount();
 					if (m <= 0) break;
@@ -175,7 +191,7 @@ public class ItemPipe extends ModTileEntity implements ITickable, IPipe, IItemPi
 				int n;
 				if (inventory == null) n = 0;
 				else if ((n = inventory.getCount()) >= inventory.getMaxStackSize()) break;
-				ItemStack extr = filter.getExtract(inventory, acc);
+				ItemStack extr = filter.getExtract(getItem(0), acc);
 				if (extr == null) continue;
 				int m = extr.getMaxStackSize() - n;
 				if (m < extr.getCount()) extr.setCount(m);
@@ -185,28 +201,21 @@ public class ItemPipe extends ModTileEntity implements ITickable, IPipe, IItemPi
 	}
 
 	@Override
-	public void onNeighborTileChange(BlockPos pos) {
+	public void neighborTileChange(BlockPos pos) {
 		updateCon = true;
 	}
 
 	@Override
-	public void onNeighborBlockChange(Block b, BlockPos src) {
+	public void neighborBlockChange(Block b, BlockPos src) {
 		updateCon = true;
 	}
 
 	@Override
 	public boolean onActivated(EntityPlayer player, EnumHand hand, ItemStack item, EnumFacing dir, float X, float Y, float Z) {
-		int type = this.getBlockMetadata();
-		boolean canF = type == BlockItemPipe.ID_Extraction || type == BlockItemPipe.ID_Injection;
-		if (player.isSneaking() && item == null) {
-			if (world.isRemote) return true;
-			if (cover != null) {
-				player.setHeldItem(hand, cover.item);
-				cover = null;
-				this.markUpdate();
-				return true;
-			}
-			dir = getClickedSide(X, Y, Z);
+		if (world.isRemote) return true;
+		boolean canF = type != 0;
+		if (player.isSneaking() && item.getCount() == 0) {
+			dir = Utils.hitSide(X, Y, Z);
 			int s = dir.getIndex();
 			int lock = this.getFlowBit(s) == 3 ? 0 : 3;
 			this.setFlowBit(s, lock);
@@ -220,30 +229,24 @@ public class ItemPipe extends ModTileEntity implements ITickable, IPipe, IItemPi
 				pipe.markUpdate();
 			}
 			return true;
-		} else if (!player.isSneaking() && item == null && filter != null) {
-			if (world.isRemote) return true;
+		} else if (!player.isSneaking() && item.getCount() == 0 && filter != null) {
 			item = new ItemStack(Objects.itemUpgrade);
 			item.setTagCompound(PipeUpgradeItem.save(filter));
 			filter = null;
 			player.setHeldItem(hand, item);
 			markUpdate();
 			return true;
-		} else if (!player.isSneaking() && cover == null && item != null && (cover = Cover.create(item)) != null) {
-			if (world.isRemote) return true;
-			item.grow(-1);
-			if (item.getCount() <= 0) item = null;
-			player.setHeldItem(hand, item);
-			markUpdate();
-			return true;
-		} else if (filter == null && canF && item != null && item.getItem() instanceof ItemItemUpgrade && item.getTagCompound() != null) {
-			if (world.isRemote) return true;
+		} else if (filter == null && canF && item.getItem() instanceof ItemItemUpgrade && item.getTagCompound() != null) {
 			filter = PipeUpgradeItem.load(item.getTagCompound());
 			item.grow(-1);
-			if (item.getCount() <= 0) item = null;
 			player.setHeldItem(hand, item);
 			markUpdate();
 			return true;
 		} else return false;
+	}
+
+	@Override
+	public void onClicked(EntityPlayer player) {
 	}
 
 	private int getFlowBit(int b) {
@@ -259,7 +262,6 @@ public class ItemPipe extends ModTileEntity implements ITickable, IPipe, IItemPi
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setShort("flow", flow);
 		if (filter != null) nbt.setTag("filter", PipeUpgradeItem.save(filter));
-		if (cover != null) cover.write(nbt, "cover");
 		if (inventory != null) nbt.setTag("item", inventory.writeToNBT(new NBTTagCompound()));
 		return super.writeToNBT(nbt);
 	}
@@ -270,7 +272,6 @@ public class ItemPipe extends ModTileEntity implements ITickable, IPipe, IItemPi
 		flow = nbt.getShort("flow");
 		if (nbt.hasKey("filter")) filter = PipeUpgradeItem.load(nbt.getCompoundTag("filter"));
 		if (nbt.hasKey("item")) inventory = new ItemStack(nbt.getCompoundTag("item"));
-		cover = Cover.read(nbt, "cover");
 		updateCon = true;
 	}
 
@@ -279,14 +280,12 @@ public class ItemPipe extends ModTileEntity implements ITickable, IPipe, IItemPi
 		NBTTagCompound nbt = pkt.getNbtCompound();
 		short nf = nbt.getShort("flow");
 		boolean f = nbt.getBoolean("filt");
-		Cover nc = Cover.read(nbt, "cover");
 		if (nbt.hasKey("it", 10)) inventory = new ItemStack(nbt.getCompoundTag("it"));
 		else inventory = null;
-		if (nf != flow || (f ^ filter != null) || (cover == null ^ nc == null) || (cover != null && nc.item.isItemEqual(cover.item))) {
+		if (nf != flow || (f ^ filter != null)) {
 			if (f) filter = new PipeUpgradeItem();
 			else filter = null;
 			flow = nf;
-			cover = nc;
 			this.markUpdate();
 		}
 	}
@@ -297,41 +296,7 @@ public class ItemPipe extends ModTileEntity implements ITickable, IPipe, IItemPi
 		nbt.setShort("flow", flow);
 		nbt.setBoolean("filt", filter != null);
 		if (last != null) nbt.setTag("it", last.writeToNBT(new NBTTagCompound()));
-		if (cover != null) cover.write(nbt, "cover");
 		return new SPacketUpdateTileEntity(getPos(), -1, nbt);
-	}
-
-	@Override
-	public int textureForSide(byte s) {
-		if (s == -1) return this.getBlockMetadata();
-		int b = getFlowBit(s);
-		EnumFacing f = EnumFacing.VALUES[s];
-		ICapabilityProvider p = getTileOnSide(f);
-		if (b == 3 || p == null || !p.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, f.getOpposite())) return -1;
-		if (filter != null && b != 0 && !(b == 2 && p instanceof ItemPipe)) b += 2;
-		return b;
-	}
-
-	@Override
-	public void breakBlock() {
-		super.breakBlock();
-		if (filter != null) {
-			ItemStack item = new ItemStack(Objects.itemUpgrade);
-			item.setTagCompound(PipeUpgradeItem.save(filter));
-			filter = null;
-			EntityItem entity = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, item);
-			world.spawnEntity(entity);
-		}
-		if (cover != null) {
-			EntityItem entity = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, cover.item);
-			cover = null;
-			world.spawnEntity(entity);
-		}
-	}
-
-	@Override
-	public Cover getCover() {
-		return cover;
 	}
 
 	@Override
@@ -343,21 +308,41 @@ public class ItemPipe extends ModTileEntity implements ITickable, IPipe, IItemPi
 			inventory = item;
 			return null;
 		}
-		if (ItemHandlerHelper.canItemStacksStack(inventory, item)) {
-			int n = inventory.getMaxStackSize() - inventory.getCount();
-			if (n >= item.getCount()) {
-				inventory.grow(item.getCount());
-				return null;
-			}
-			inventory.grow(n);
-			item.shrink(n);
-		}
 		return item;
 	}
 
-	private class PipeAccess extends TileAccess {
-		IItemPipeCon pipe;
-		PipeAccess(IItemPipeCon pipe, EnumFacing side) {super((TileEntity)pipe, side); this.pipe = pipe;}
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T getModuleState(int m) {
+		int b = getFlowBit(m);
+		EnumFacing f = EnumFacing.VALUES[m];
+		ICapabilityProvider p = getTileOnSide(f);
+		if (b == 3 || p == null || !p.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, f.getOpposite())) return (T)Byte.valueOf((byte)-1);
+		if (filter != null && b != 0 && !(b == 2 && p instanceof ItemPipe)) b += 2;
+		return (T)Byte.valueOf((byte)b);
+	}
+
+	@Override
+	public boolean isModulePresent(int m) {
+		int b = getFlowBit(m);
+		EnumFacing f = EnumFacing.VALUES[m];
+		ICapabilityProvider p = getTileOnSide(f);
+		return b != 3 && p != null && p.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, f.getOpposite());
+	}
+
+	@Override
+	public void onPlaced(EntityLivingBase entity, ItemStack item) {
+	}
+
+	@Override
+	public List<ItemStack> dropItem(IBlockState state, int fortune) {
+		List<ItemStack> list = makeDefaultDrops(null);
+		if (filter != null) {
+			ItemStack item = new ItemStack(Objects.itemUpgrade);
+			item.setTagCompound(PipeUpgradeItem.save(filter));
+			list.add(item);
+		}
+		return list;
 	}
 
 }

@@ -56,6 +56,7 @@ public class WarpPipePhysics extends SharedNetwork<BasicWarpPipe, WarpPipePhysic
 		}
 	}
 	
+	@SuppressWarnings("unlikely-arg-type")
 	private ConComp remConnector(long pos) {
 		ConComp con = connectors.remove(pos);
 		if (con instanceof ITickable) activeCon.remove(con);

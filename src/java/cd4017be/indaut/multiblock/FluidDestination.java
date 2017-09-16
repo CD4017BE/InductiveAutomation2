@@ -3,10 +3,13 @@ package cd4017be.indaut.multiblock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+
+import java.util.List;
+
 import cd4017be.indaut.Objects;
-import cd4017be.indaut.block.BlockLiquidPipe;
 import cd4017be.indaut.multiblock.WarpPipePhysics.IFluidDest;
-import cd4017be.lib.ModTileEntity;
+import cd4017be.lib.block.BaseTileEntity;
+import cd4017be.lib.util.ItemFluidUtil;
 
 public class FluidDestination extends FluidComp implements IFluidDest {
 
@@ -16,18 +19,23 @@ public class FluidDestination extends FluidComp implements IFluidDest {
 
 	@Override
 	public boolean onClicked(EntityPlayer player, EnumHand hand, ItemStack item, long uid) {
-		if (player == null) ((ModTileEntity)pipe.tile).dropStack(new ItemStack(Objects.liquidPipe, 1, BlockLiquidPipe.ID_Injection));
-		if (super.onClicked(player, hand, item, uid) || player == null) return true;
-		if (item == null && player.isSneaking()) {
-			((ModTileEntity)pipe.tile).dropStack(new ItemStack(Objects.liquidPipe, 1, BlockLiquidPipe.ID_Injection));
+		if (super.onClicked(player, hand, item, uid)) return true;
+		if (item.getCount() == 0 && player.isSneaking()) {
+			ItemFluidUtil.dropStack(new ItemStack(Objects.fluidPipe, 1, 1), player);
 			pipe.con[side] = 0;
 			pipe.network.remConnector(pipe, side);
 			pipe.updateCon = true;
 			pipe.hasFilters &= ~(1 << side);
-			((ModTileEntity)pipe.tile).markUpdate();
+			((BaseTileEntity)pipe.tile).markUpdate();
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void dropContent(List<ItemStack> list) {
+		list.add(new ItemStack(Objects.fluidPipe, 1, 1));
+		super.dropContent(list);
 	}
 
 }

@@ -3,8 +3,8 @@ package cd4017be.indaut.multiblock;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.capabilities.Capability;
+import cd4017be.api.IAbstractTile;
 import cd4017be.indaut.Objects;
-import cd4017be.lib.ModTileEntity;
 import cd4017be.lib.templates.MultiblockComp;
 import cd4017be.lib.templates.SharedNetwork;
 
@@ -14,7 +14,7 @@ public class BasicWarpPipe extends MultiblockComp<BasicWarpPipe, WarpPipePhysics
 	public byte hasFilters = 0;
 	public boolean redstone = false;
 
-	public BasicWarpPipe(ModTileEntity pipe) {
+	public BasicWarpPipe(IAbstractTile pipe) {
 		super(pipe);
 	}
 
@@ -49,7 +49,7 @@ public class BasicWarpPipe extends MultiblockComp<BasicWarpPipe, WarpPipePhysics
 		}
 	}
 
-	public static BasicWarpPipe readFromNBT(ModTileEntity tile, NBTTagCompound nbt) {
+	public static BasicWarpPipe readFromNBT(IAbstractTile tile, NBTTagCompound nbt) {
 		BasicWarpPipe pipe = new BasicWarpPipe(tile);
 		WarpPipePhysics physics = new WarpPipePhysics(pipe);
 		NBTTagList list = nbt.getTagList("connectors", 10);

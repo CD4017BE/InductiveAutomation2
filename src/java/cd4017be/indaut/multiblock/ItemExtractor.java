@@ -1,8 +1,10 @@
 package cd4017be.indaut.multiblock;
 
+import java.util.List;
+
 import cd4017be.indaut.Objects;
-import cd4017be.indaut.block.BlockItemPipe;
-import cd4017be.lib.ModTileEntity;
+import cd4017be.lib.block.BaseTileEntity;
+import cd4017be.lib.util.ItemFluidUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -25,36 +27,40 @@ public class ItemExtractor extends ItemComp implements ITickable {
 		IItemHandler acc = link.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.VALUES[this.side^1]);
 		if (acc == null) return;
 		int s, target = -1, m = acc.getSlots();
-		ItemStack stack = null;
+		ItemStack stack = ItemStack.EMPTY;
 		for (int i = slotIdx; i < slotIdx + m; i++) {
 			stack = acc.extractItem(s = i % m, 65536, true);
-			if (stack != null && (filter == null || (stack = filter.getExtract(stack, acc)) != null)) {
+			if (stack.getCount() > 0 && (filter == null || (stack = filter.getExtract(stack, acc)).getCount() > 0)) {
 				target = s;
 				slotIdx = (i + 1) % m;
 				break;
 			}
 		}
-		if (target < 0 || stack == null) return;
 		m = stack.getCount();
-		stack = pipe.network.insertItem(stack, filter == null || (filter.mode & 2) == 0 ? Byte.MAX_VALUE : filter.priority);
-		if (stack != null) m -= stack.getCount();
+		if (target < 0 || m == 0) return;
+		m -= pipe.network.insertItem(stack, filter == null || (filter.mode & 2) == 0 ? Byte.MAX_VALUE : filter.priority).getCount();
 		acc.extractItem(target, m, false);
 	}
 
 	@Override
 	public boolean onClicked(EntityPlayer player, EnumHand hand, ItemStack item, long uid) {
-		if (player == null) ((ModTileEntity)pipe.tile).dropStack(new ItemStack(Objects.itemPipe, 1, BlockItemPipe.ID_Extraction));
-		if (super.onClicked(player, hand, item, uid) || player == null) return true;
-		if (player.isSneaking() && player.getHeldItemMainhand() == null) {
-			((ModTileEntity)pipe.tile).dropStack(new ItemStack(Objects.itemPipe, 1, BlockItemPipe.ID_Extraction));
+		if (super.onClicked(player, hand, item, uid)) return true;
+		if (player.isSneaking() && player.getHeldItemMainhand().isEmpty()) {
+			ItemFluidUtil.dropStack(new ItemStack(Objects.itemPipe, 1, 2), player);
 			pipe.con[side] = 0;
 			pipe.network.remConnector(pipe, side);
 			pipe.updateCon = true;
 			pipe.hasFilters &= ~(1 << side);
-			((ModTileEntity)pipe.tile).markUpdate();
+			((BaseTileEntity)pipe.tile).markUpdate();
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void dropContent(List<ItemStack> list) {
+		list.add(new ItemStack(Objects.itemPipe, 1, 2));
+		super.dropContent(list);
 	}
 
 }

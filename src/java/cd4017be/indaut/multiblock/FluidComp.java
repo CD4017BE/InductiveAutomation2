@@ -10,10 +10,13 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+
+import java.util.List;
+
 import cd4017be.indaut.Objects;
 import cd4017be.indaut.item.PipeUpgradeFluid;
 import cd4017be.indaut.multiblock.WarpPipePhysics.IObjLink;
-import cd4017be.lib.ModTileEntity;
+import cd4017be.lib.util.ItemFluidUtil;
 
 public class FluidComp extends ConComp implements IObjLink {
 
@@ -57,24 +60,32 @@ public class FluidComp extends ConComp implements IObjLink {
 
 	@Override
 	public boolean onClicked(EntityPlayer player, EnumHand hand, ItemStack item, long uid) {
-		if (item == null && filter != null) {
+		if (item.getCount() == 0 && filter != null) {
 			item = new ItemStack(Objects.fluidUpgrade);
 			item.setTagCompound(PipeUpgradeFluid.save(filter));
 			filter = null;
-			((ModTileEntity)pipe.tile).dropStack(item);
+			ItemFluidUtil.dropStack(item, player);
 			pipe.network.reorder(this);
 			pipe.hasFilters &= ~(1 << side);
 			return true;
-		} else if (filter == null && item != null && item.getItem() == Objects.fluidUpgrade && item.getTagCompound() != null) {
+		} else if (filter == null && item.getItem() == Objects.fluidUpgrade && item.getTagCompound() != null) {
 			filter = PipeUpgradeFluid.load(item.getTagCompound());
 			item.grow(-1);
-			if (item.getCount() <= 0) item = null;
 			player.setHeldItem(hand, item);
 			pipe.network.reorder(this);
 			pipe.hasFilters |= 1 << side;
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void dropContent(List<ItemStack> list) {
+		if (filter != null) {
+			ItemStack item = new ItemStack(Objects.fluidUpgrade);
+			item.setTagCompound(PipeUpgradeFluid.save(filter));
+			list.add(item);
+		}
 	}
 
 	/**
