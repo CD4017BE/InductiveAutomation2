@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"normal": { "model": "automation:wireH" },
+		"core0": { "model": "automation:wireH_core" },
+		"con0": { "model": "automation:wireH_con" }
+	}
+}

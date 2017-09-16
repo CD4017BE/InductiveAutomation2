@@ -1,0 +1,15 @@
+{
+	"variants": {
+		"type=0": { "model": "automation:liquidPipe" },
+		"type=1": { "model": "automation:liquidPipe" },
+		"type=2": { "model": "automation:liquidPipe" },
+		"core0": { "model": "automation:liquidPipeT_core"},
+		"core1": { "model": "automation:liquidPipeI_core"},
+		"core2": { "model": "automation:liquidPipeE_core"},
+		"con0": { "model": "automation:liquidPipeT_con" },
+		"con1": { "model": "automation:liquidPipeI_con" },
+		"con2": { "model": "automation:liquidPipeE_con" },
+		"con3": { "model": "automation:liquidPipeIF_con" },
+		"con4": { "model": "automation:liquidPipeEF_con" }
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"variants": {
+		"normal": { "model": "automation:warpPipe" },
+		"core0": { "model": "automation:warpPipe_core"},
+		"con0": { "model": "automation:warpPipe_con" },
+		"con1": { "model": "automation:itemPipeI_con" },
+		"con2": { "model": "automation:itemPipeE_con" },
+		"con3": { "model": "automation:liquidPipeI_con" },
+		"con4": { "model": "automation:liquidPipeE_con" },
+		"con5": { "model": "automation:itemPipeIF_con" },
+		"con6": { "model": "automation:itemPipeEF_con" },
+		"con7": { "model": "automation:liquidPipeIF_con" },
+		"con8": { "model": "automation:liquidPipeEF_con" }
+	}
+}
