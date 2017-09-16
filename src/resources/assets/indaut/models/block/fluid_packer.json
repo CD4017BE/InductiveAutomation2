@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/fluidPacker0",
-		"bot": "automation:blocks/fluidPacker1",
-		"front": "automation:blocks/fluidPacker2",
-		"back": "automation:blocks/fluidPacker3",
-		"left": "automation:blocks/fluidPacker3",
-		"right": "automation:blocks/fluidPacker3"
+		"top": "indaut:block/fluid_packer0",
+		"bot": "indaut:block/fluid_packer1",
+		"front": "indaut:block/fluid_packer2",
+		"back": "indaut:block/fluid_packer3",
+		"left": "indaut:block/fluid_packer3",
+		"right": "indaut:block/fluid_packer3"
 	}
 }

@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"orient=n": { "model": "automation:CEU" },
-		"orient=e": { "model": "automation:CEU" , "y": 90 },
-		"orient=s": { "model": "automation:CEU" , "y": 180 },
-		"orient=w": { "model": "automation:CEU" , "y": 270 }
+		"orient=n": { "model": "indaut:ceu" },
+		"orient=e": { "model": "indaut:ceu" , "y": 90 },
+		"orient=s": { "model": "indaut:ceu" , "y": 180 },
+		"orient=w": { "model": "indaut:ceu" , "y": 270 }
 	}
 }

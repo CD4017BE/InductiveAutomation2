@@ -1,7 +1,7 @@
 {
 	"variants": {
-		"ore=silver": { "model": "automation:silver" },
-		"ore=copper": { "model": "automation:copper" },
-		"ore=aluminium": { "model": "automation:aluminium" }
+		"ore=silver": { "model": "indaut:silver" },
+		"ore=copper": { "model": "indaut:copper" },
+		"ore=aluminium": { "model": "indaut:aluminium" }
 	}
 }

@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/tank0",
-		"bot": "automation:blocks/tank0",
-		"front": "automation:blocks/tank0",
-		"back": "automation:blocks/tank0",
-		"left": "automation:blocks/tank0",
-		"right": "automation:blocks/tank0"
+		"top": "indaut:block/tank0",
+		"bot": "indaut:block/tank0",
+		"front": "indaut:block/tank0",
+		"back": "indaut:block/tank0",
+		"left": "indaut:block/tank0",
+		"right": "indaut:block/tank0"
 	}
 }

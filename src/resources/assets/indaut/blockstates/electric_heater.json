@@ -1,10 +1,10 @@
 {
 	"variants": {
-		"orient=n": { "model": "automation:electricHeater" },
-		"orient=e": { "model": "automation:electricHeater" , "y": 90 },
-		"orient=s": { "model": "automation:electricHeater" , "y": 180 },
-		"orient=w": { "model": "automation:electricHeater" , "y": 270 },
-		"orient=b": { "model": "automation:electricHeater" , "x": 90 },
-		"orient=t": { "model": "automation:electricHeater" , "x": 270 }
+		"orient=n": { "model": "indaut:electric_heater" },
+		"orient=e": { "model": "indaut:electric_heater" , "y": 90 },
+		"orient=s": { "model": "indaut:electric_heater" , "y": 180 },
+		"orient=w": { "model": "indaut:electric_heater" , "y": 270 },
+		"orient=b": { "model": "indaut:electric_heater" , "x": 90 },
+		"orient=t": { "model": "indaut:electric_heater" , "x": 270 }
 	}
 }

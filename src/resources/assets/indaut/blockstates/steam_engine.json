@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:steamEngine" }
+		"normal": { "model": "indaut:steam_engine" }
 	}
 }

@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"orient=n": { "model": "automation:steamBoiler" },
-		"orient=e": { "model": "automation:steamBoiler" , "y": 90 },
-		"orient=s": { "model": "automation:steamBoiler" , "y": 180 },
-		"orient=w": { "model": "automation:steamBoiler" , "y": 270 }
+		"orient=n": { "model": "indaut:steam_boiler" },
+		"orient=e": { "model": "indaut:steam_boiler" , "y": 90 },
+		"orient=s": { "model": "indaut:steam_boiler" , "y": 180 },
+		"orient=w": { "model": "indaut:steam_boiler" , "y": 270 }
 	}
 }

@@ -1,6 +1,6 @@
 {
-	"parent": "automation:block/pipeCon4",
+	"parent": "indaut:block/pipe_con4",
     "textures": {
-        "tex": "automation:blocks/pipes/liquidTr"
+        "tex": "indaut:block/pipes/liquid_tr"
     }
 }

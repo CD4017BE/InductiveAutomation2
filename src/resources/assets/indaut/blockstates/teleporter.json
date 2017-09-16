@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:teleporter" }
+		"normal": { "model": "indaut:teleporter" }
 	}
 }

@@ -1,7 +1,7 @@
 {
 	"variants": {
-		"normal": { "model": "automation:wireA" },
-		"core0": { "model": "automation:wireA_core" },
-		"con0": { "model": "automation:wireA_con" }
+		"normal": { "model": "indaut:wire_a" },
+		"core0": { "model": "indaut:wire_a_core" },
+		"con0": { "model": "indaut:wire_a_con" }
 	}
 }

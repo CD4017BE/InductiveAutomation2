@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:unbrGlass" }
+		"normal": { "model": "indaut:unbr_glass" }
 	}
 }

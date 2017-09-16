@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:antimatterBombE" }
+		"normal": { "model": "indaut:antimatter_bomb_e" }
 	}
 }

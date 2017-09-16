@@ -1,10 +1,10 @@
 {
 	"variants": {
-		"orient=n": { "model": "automation:collector" },
-		"orient=e": { "model": "automation:collector" , "y": 90 },
-		"orient=s": { "model": "automation:collector" , "y": 180 },
-		"orient=w": { "model": "automation:collector" , "y": 270 },
-		"orient=b": { "model": "automation:collector" , "x": 90 },
-		"orient=t": { "model": "automation:collector" , "x": 270 }
+		"orient=n": { "model": "indaut:collector" },
+		"orient=e": { "model": "indaut:collector" , "y": 90 },
+		"orient=s": { "model": "indaut:collector" , "y": 180 },
+		"orient=w": { "model": "indaut:collector" , "y": 270 },
+		"orient=b": { "model": "indaut:collector" , "x": 90 },
+		"orient=t": { "model": "indaut:collector" , "x": 270 }
 	}
 }

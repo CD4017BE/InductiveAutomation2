@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/matterOrb0",
-		"bot": "automation:blocks/matterOrb0",
-		"front": "automation:blocks/matterOrb0",
-		"back": "automation:blocks/matterOrb0",
-		"left": "automation:blocks/matterOrb0",
-		"right": "automation:blocks/matterOrb0"
+		"top": "indaut:block/matter_orb0",
+		"bot": "indaut:block/matter_orb0",
+		"front": "indaut:block/matter_orb0",
+		"back": "indaut:block/matter_orb0",
+		"left": "indaut:block/matter_orb0",
+		"right": "indaut:block/matter_orb0"
 	}
 }

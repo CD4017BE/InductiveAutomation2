@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"orient=n": { "model": "automation:fluidPacker" },
-		"orient=e": { "model": "automation:fluidPacker" , "y": 90 },
-		"orient=s": { "model": "automation:fluidPacker" , "y": 180 },
-		"orient=w": { "model": "automation:fluidPacker" , "y": 270 }
+		"orient=n": { "model": "indaut:fluid_packer" },
+		"orient=e": { "model": "indaut:fluid_packer" , "y": 90 },
+		"orient=s": { "model": "indaut:fluid_packer" , "y": 180 },
+		"orient=w": { "model": "indaut:fluid_packer" , "y": 270 }
 	}
 }

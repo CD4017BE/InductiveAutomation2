@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:hpSolarpanel" }
+		"normal": { "model": "indaut:hp_solarpanel" }
 	}
 }

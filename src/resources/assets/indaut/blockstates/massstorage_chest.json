@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"orient=n": { "model": "automation:massstorageChest" },
-		"orient=e": { "model": "automation:massstorageChest" , "y": 90 },
-		"orient=s": { "model": "automation:massstorageChest" , "y": 180 },
-		"orient=w": { "model": "automation:massstorageChest" , "y": 270 }
+		"orient=n": { "model": "indaut:massstorage_chest" },
+		"orient=e": { "model": "indaut:massstorage_chest" , "y": 90 },
+		"orient=s": { "model": "indaut:massstorage_chest" , "y": 180 },
+		"orient=w": { "model": "indaut:massstorage_chest" , "y": 270 }
 	}
 }

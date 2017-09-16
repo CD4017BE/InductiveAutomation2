@@ -1,0 +1,3 @@
+automation:=indaut:
+blocks/=block/
+items/=item/

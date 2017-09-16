@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/magnet0",
-		"bot": "automation:blocks/magnet0",
-		"front": "automation:blocks/magnet1",
-		"back": "automation:blocks/magnet1",
-		"left": "automation:blocks/magnet1",
-		"right": "automation:blocks/magnet1"
+		"top": "indaut:block/magnet0",
+		"bot": "indaut:block/magnet0",
+		"front": "indaut:block/magnet1",
+		"back": "indaut:block/magnet1",
+		"left": "indaut:block/magnet1",
+		"right": "indaut:block/magnet1"
 	}
 }

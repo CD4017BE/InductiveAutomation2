@@ -1,6 +1,6 @@
 {
-	"parent": "automation:block/CUBE",
+	"parent": "indaut:block/cube",
 	"textures": {
-		"tex": "automation:blocks/ore/copper"
+		"tex": "indaut:block/ore/copper"
 	}
 }

@@ -1,5 +1,5 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "automation:items/tools/portableFurnace"
+        "layer0": "indaut:item/tools/portable_furnace"
     }}

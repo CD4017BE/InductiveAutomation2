@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:gravCond" }
+		"normal": { "model": "indaut:grav_cond" }
 	}
 }

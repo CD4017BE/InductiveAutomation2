@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/trash0",
-		"bot": "automation:blocks/trash1",
-		"front": "automation:blocks/trash2",
-		"back": "automation:blocks/trash2",
-		"left": "automation:blocks/trash2",
-		"right": "automation:blocks/trash2"
+		"top": "indaut:block/trash0",
+		"bot": "indaut:block/trash1",
+		"front": "indaut:block/trash2",
+		"back": "indaut:block/trash2",
+		"left": "indaut:block/trash2",
+		"right": "indaut:block/trash2"
 	}
 }

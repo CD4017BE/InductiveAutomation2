@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:SCSU" }
+		"normal": { "model": "indaut:scsu" }
 	}
 }

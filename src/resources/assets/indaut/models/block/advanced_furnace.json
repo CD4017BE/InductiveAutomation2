@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/advancedFurnace0",
-		"bot": "automation:blocks/advancedFurnace1",
-		"front": "automation:blocks/advancedFurnace2",
-		"back": "automation:blocks/advancedFurnace3",
-		"left": "automation:blocks/advancedFurnace3",
-		"right": "automation:blocks/advancedFurnace3"
+		"top": "indaut:block/advanced_furnace0",
+		"bot": "indaut:block/advanced_furnace1",
+		"front": "indaut:block/advanced_furnace2",
+		"back": "indaut:block/advanced_furnace3",
+		"left": "indaut:block/advanced_furnace3",
+		"right": "indaut:block/advanced_furnace3"
 	}
 }

@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/quantumTank0",
-		"bot": "automation:blocks/quantumTank0",
-		"front": "automation:blocks/quantumTank0",
-		"back": "automation:blocks/quantumTank0",
-		"left": "automation:blocks/quantumTank0",
-		"right": "automation:blocks/quantumTank0"
+		"top": "indaut:block/quantum_tank0",
+		"bot": "indaut:block/quantum_tank0",
+		"front": "indaut:block/quantum_tank0",
+		"back": "indaut:block/quantum_tank0",
+		"left": "indaut:block/quantum_tank0",
+		"right": "indaut:block/quantum_tank0"
 	}
 }

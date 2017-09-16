@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:matterInterfaceB" }
+		"normal": { "model": "indaut:matter_interfaceB" }
 	}
 }

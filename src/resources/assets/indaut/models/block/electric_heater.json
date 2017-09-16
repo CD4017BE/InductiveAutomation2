@@ -1,8 +1,8 @@
 {
-	"parent": "automation:block/coil",
+	"parent": "indaut:block/coil",
 	"textures": {
-		"main": "automation:blocks/heater0",
-		"front": "automation:blocks/heater1",
-		"back": "automation:blocks/thermIns"
+		"main": "indaut:block/heater0",
+		"front": "indaut:block/heater1",
+		"back": "indaut:block/therm_ins"
 	}
 }

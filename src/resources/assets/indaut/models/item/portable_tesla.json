@@ -1,5 +1,5 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "automation:items/tools/portableTesla"
+        "layer0": "indaut:item/tools/portable_tesla"
     }}

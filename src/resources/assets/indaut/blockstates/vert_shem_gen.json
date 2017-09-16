@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:vertShemGen" }
+		"normal": { "model": "indaut:vert_shem_gen" }
 	}
 }

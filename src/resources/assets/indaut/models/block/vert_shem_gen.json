@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/vertShemGen1",
-		"bot": "automation:blocks/vertShemGen0",
-		"front": "automation:blocks/vertShemGen2",
-		"back": "automation:blocks/vertShemGen3",
-		"left": "automation:blocks/vertShemGen5",
-		"right": "automation:blocks/vertShemGen4"
+		"top": "indaut:block/vert_shem_gen1",
+		"bot": "indaut:block/vert_shem_gen0",
+		"front": "indaut:block/vert_shem_gen2",
+		"back": "indaut:block/vert_shem_gen3",
+		"left": "indaut:block/vert_shem_gen5",
+		"right": "indaut:block/vert_shem_gen4"
 	}
 }

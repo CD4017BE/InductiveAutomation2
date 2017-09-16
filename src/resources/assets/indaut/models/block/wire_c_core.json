@@ -1,6 +1,6 @@
 {
-	"parent": "automation:block/pipeCore4",
+	"parent": "indaut:block/pipe_core4",
     "textures": {
-        "tex": "automation:blocks/pipes/copper"
+        "tex": "indaut:block/pipes/copper"
     }
 }

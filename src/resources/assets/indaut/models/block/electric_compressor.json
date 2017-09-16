@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/electricCompressor0",
-		"bot": "automation:blocks/electricCompressor1",
-		"front": "automation:blocks/electricCompressor2",
-		"back": "automation:blocks/electricCompressor3",
-		"left": "automation:blocks/electricCompressor3",
-		"right": "automation:blocks/electricCompressor3"
+		"top": "indaut:block/electric_compressor0",
+		"bot": "indaut:block/electric_compressor1",
+		"front": "indaut:block/electric_compressor2",
+		"back": "indaut:block/electric_compressor3",
+		"left": "indaut:block/electric_compressor3",
+		"right": "indaut:block/electric_compressor3"
 	}
 }

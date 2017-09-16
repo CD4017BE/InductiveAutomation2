@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:steamGenerator" }
+		"normal": { "model": "indaut:steam_generator" }
 	}
 }

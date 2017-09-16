@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/texMaker0",
-		"bot": "automation:blocks/texMaker1",
-		"front": "automation:blocks/texMaker2",
-		"back": "automation:blocks/texMaker2",
-		"left": "automation:blocks/texMaker2",
-		"right": "automation:blocks/texMaker2"
+		"top": "indaut:block/tex_maker0",
+		"bot": "indaut:block/tex_maker1",
+		"front": "indaut:block/tex_maker2",
+		"back": "indaut:block/tex_maker2",
+		"left": "indaut:block/tex_maker2",
+		"right": "indaut:block/tex_maker2"
 	}
 }

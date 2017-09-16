@@ -1,7 +1,7 @@
 {
-	"parent": "automation:block/pipeCon4F",
+	"parent": "indaut:block/pipe_con4F",
     "textures": {
-        "tex": "automation:blocks/pipes/liquidIn",
-		"filter": "automation:blocks/pipes/fluidFilter"
+        "tex": "indaut:block/pipes/liquid_in",
+		"filter": "indaut:block/pipes/fluid_filter"
     }
 }

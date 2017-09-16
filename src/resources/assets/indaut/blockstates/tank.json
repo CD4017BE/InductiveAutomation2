@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:tank" }
+		"normal": { "model": "indaut:tank" }
 	}
 }

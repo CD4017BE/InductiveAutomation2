@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:OCSU" }
+		"normal": { "model": "indaut:ocsu" }
 	}
 }

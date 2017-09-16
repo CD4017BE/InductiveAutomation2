@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:lightShaft" }
+		"normal": { "model": "indaut:light_shaft" }
 	}
 }

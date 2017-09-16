@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/teleporter0",
-		"bot": "automation:blocks/teleporter1",
-		"front": "automation:blocks/teleporter2",
-		"back": "automation:blocks/teleporter2",
-		"left": "automation:blocks/teleporter2",
-		"right": "automation:blocks/teleporter2"
+		"top": "indaut:block/teleporter0",
+		"bot": "indaut:block/teleporter1",
+		"front": "indaut:block/teleporter2",
+		"back": "indaut:block/teleporter2",
+		"left": "indaut:block/teleporter2",
+		"right": "indaut:block/teleporter2"
 	}
 }

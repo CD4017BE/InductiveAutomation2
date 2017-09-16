@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/antimatterBombE0",
-		"bot": "automation:blocks/antimatterBombE1",
-		"front": "automation:blocks/antimatterBombE2",
-		"back": "automation:blocks/antimatterBombE2",
-		"left": "automation:blocks/antimatterBombE2",
-		"right": "automation:blocks/antimatterBombE2"
+		"top": "indaut:block/antimatter_bomb_e0",
+		"bot": "indaut:block/antimatter_bomb_e1",
+		"front": "indaut:block/antimatter_bomb_e2",
+		"back": "indaut:block/antimatter_bomb_e2",
+		"left": "indaut:block/antimatter_bomb_e2",
+		"right": "indaut:block/antimatter_bomb_e2"
 	}
 }

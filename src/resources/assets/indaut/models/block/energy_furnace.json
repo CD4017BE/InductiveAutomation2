@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/energyFurnace0",
-		"bot": "automation:blocks/energyFurnace1",
-		"front": "automation:blocks/energyFurnace2",
-		"back": "automation:blocks/energyFurnace3",
-		"left": "automation:blocks/energyFurnace3",
-		"right": "automation:blocks/energyFurnace3"
+		"top": "indaut:block/energy_furnace0",
+		"bot": "indaut:block/energy_furnace1",
+		"front": "indaut:block/energy_furnace2",
+		"back": "indaut:block/energy_furnace3",
+		"left": "indaut:block/energy_furnace3",
+		"right": "indaut:block/energy_furnace3"
 	}
 }

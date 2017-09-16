@@ -1,6 +1,6 @@
 {
-	"parent": "automation:block/CUBE",
+	"parent": "indaut:block/cube",
 	"textures": {
-		"tex": "automation:blocks/unbr/stone2"
+		"tex": "indaut:block/unbr/stone2"
 	}
 }

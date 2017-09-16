@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/massstorageChest0",
-		"bot": "automation:blocks/massstorageChest1",
-		"front": "automation:blocks/massstorageChest2",
-		"back": "automation:blocks/massstorageChest3",
-		"left": "automation:blocks/massstorageChest3",
-		"right": "automation:blocks/massstorageChest3"
+		"top": "indaut:block/massstorage_chest0",
+		"bot": "indaut:block/massstorage_chest1",
+		"front": "indaut:block/massstorage_chest2",
+		"back": "indaut:block/massstorage_chest3",
+		"left": "indaut:block/massstorage_chest3",
+		"right": "indaut:block/massstorage_chest3"
 	}
 }

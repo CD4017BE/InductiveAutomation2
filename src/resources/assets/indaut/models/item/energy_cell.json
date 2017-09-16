@@ -1,5 +1,5 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "automation:items/tools/energyCell"
+        "layer0": "indaut:item/tools/energy_cell"
     }}

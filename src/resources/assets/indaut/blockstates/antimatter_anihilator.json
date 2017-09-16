@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"orient=n": { "model": "automation:antimatterAnihilator" },
-		"orient=e": { "model": "automation:antimatterAnihilator" , "y": 90 },
-		"orient=s": { "model": "automation:antimatterAnihilator" , "y": 180 },
-		"orient=w": { "model": "automation:antimatterAnihilator" , "y": 270 }
+		"orient=n": { "model": "indaut:antimatter_anihilator" },
+		"orient=e": { "model": "indaut:antimatter_anihilator" , "y": 90 },
+		"orient=s": { "model": "indaut:antimatter_anihilator" , "y": 180 },
+		"orient=w": { "model": "indaut:antimatter_anihilator" , "y": 270 }
 	}
 }

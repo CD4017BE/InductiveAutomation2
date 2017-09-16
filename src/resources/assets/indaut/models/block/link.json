@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/link1",
-		"bot": "automation:blocks/link1",
-		"front": "automation:blocks/link0",
-		"back": "automation:blocks/link1",
-		"left": "automation:blocks/link1",
-		"right": "automation:blocks/link1"
+		"top": "indaut:block/link1",
+		"bot": "indaut:block/link1",
+		"front": "indaut:block/link0",
+		"back": "indaut:block/link1",
+		"left": "indaut:block/link1",
+		"right": "indaut:block/link1"
 	}
 }

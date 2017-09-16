@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/lightShaft0",
-		"bot": "automation:blocks/lightShaft1",
-		"front": "automation:blocks/lightShaft2",
-		"back": "automation:blocks/lightShaft2",
-		"left": "automation:blocks/lightShaft2",
-		"right": "automation:blocks/lightShaft2"
+		"top": "indaut:block/light_shaft0",
+		"bot": "indaut:block/light_shaft1",
+		"front": "indaut:block/light_shaft2",
+		"back": "indaut:block/light_shaft2",
+		"left": "indaut:block/light_shaft2",
+		"right": "indaut:block/light_shaft2"
 	}
 }

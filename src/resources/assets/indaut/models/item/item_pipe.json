@@ -1,5 +1,5 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "automation:blocks/pipes/itemTr"
+        "layer0": "indaut:block/pipes/item_tr"
     }}

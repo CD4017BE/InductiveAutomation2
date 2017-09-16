@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"orient=n": { "model": "automation:solidFuelHeater" },
-		"orient=e": { "model": "automation:solidFuelHeater" , "y": 90 },
-		"orient=s": { "model": "automation:solidFuelHeater" , "y": 180 },
-		"orient=w": { "model": "automation:solidFuelHeater" , "y": 270 }
+		"orient=n": { "model": "indaut:solid_fuel_heater" },
+		"orient=e": { "model": "indaut:solid_fuel_heater" , "y": 90 },
+		"orient=s": { "model": "indaut:solid_fuel_heater" , "y": 180 },
+		"orient=w": { "model": "indaut:solid_fuel_heater" , "y": 270 }
 	}
 }

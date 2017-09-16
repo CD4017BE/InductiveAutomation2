@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/CCSU0",
-		"bot": "automation:blocks/CCSU0",
-		"front": "automation:blocks/CCSU1",
-		"back": "automation:blocks/CCSU1",
-		"left": "automation:blocks/CCSU1",
-		"right": "automation:blocks/CCSU1"
+		"top": "indaut:block/ccsu0",
+		"bot": "indaut:block/ccsu0",
+		"front": "indaut:block/ccsu1",
+		"back": "indaut:block/ccsu1",
+		"left": "indaut:block/ccsu1",
+		"right": "indaut:block/ccsu1"
 	}
 }

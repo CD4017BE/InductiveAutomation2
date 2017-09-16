@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:autoCrafting" }
+		"normal": { "model": "indaut:auto_crafting" }
 	}
 }

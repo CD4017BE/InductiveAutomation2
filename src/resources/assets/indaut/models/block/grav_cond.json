@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/gravCond0",
-		"bot": "automation:blocks/gravCond0",
-		"front": "automation:blocks/gravCond0",
-		"back": "automation:blocks/gravCond0",
-		"left": "automation:blocks/gravCond0",
-		"right": "automation:blocks/gravCond0"
+		"top": "indaut:block/grav_cond0",
+		"bot": "indaut:block/grav_cond0",
+		"front": "indaut:block/grav_cond0",
+		"back": "indaut:block/grav_cond0",
+		"left": "indaut:block/grav_cond0",
+		"right": "indaut:block/grav_cond0"
 	}
 }

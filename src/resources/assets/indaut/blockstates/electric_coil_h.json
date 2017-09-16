@@ -1,10 +1,10 @@
 {
 	"variants": {
-		"orient=n": { "model": "automation:electricCoilH" },
-		"orient=e": { "model": "automation:electricCoilH" , "y": 90 },
-		"orient=s": { "model": "automation:electricCoilH" , "y": 180 },
-		"orient=w": { "model": "automation:electricCoilH" , "y": 270 },
-		"orient=b": { "model": "automation:electricCoilH" , "x": 90 },
-		"orient=t": { "model": "automation:electricCoilH" , "x": 270 }
+		"orient=n": { "model": "indaut:electriccoil_h" },
+		"orient=e": { "model": "indaut:electriccoil_h" , "y": 90 },
+		"orient=s": { "model": "indaut:electriccoil_h" , "y": 180 },
+		"orient=w": { "model": "indaut:electriccoil_h" , "y": 270 },
+		"orient=b": { "model": "indaut:electriccoil_h" , "x": 90 },
+		"orient=t": { "model": "indaut:electriccoil_h" , "x": 270 }
 	}
 }

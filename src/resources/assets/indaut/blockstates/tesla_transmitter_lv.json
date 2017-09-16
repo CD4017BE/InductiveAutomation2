@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:teslaTransmitterLV" }
+		"normal": { "model": "indaut:tesla_transmitterLV" }
 	}
 }

@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:magnet" }
+		"normal": { "model": "indaut:magnet" }
 	}
 }

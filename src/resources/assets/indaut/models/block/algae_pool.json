@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/algaePool0",
-		"bot": "automation:blocks/algaePool1",
-		"front": "automation:blocks/algaePool2",
-		"back": "automation:blocks/algaePool3",
-		"left": "automation:blocks/algaePool3",
-		"right": "automation:blocks/algaePool3"
+		"top": "indaut:block/algae_pool0",
+		"bot": "indaut:block/algae_pool1",
+		"front": "indaut:block/algae_pool2",
+		"back": "indaut:block/algae_pool3",
+		"left": "indaut:block/algae_pool3",
+		"right": "indaut:block/algae_pool3"
 	}
 }

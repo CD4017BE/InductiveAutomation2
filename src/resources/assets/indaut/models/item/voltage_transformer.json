@@ -1,2 +1,2 @@
 {
-    "parent": "automation:block/voltageTransformer"}
+    "parent": "indaut:block/voltage_transformer"}

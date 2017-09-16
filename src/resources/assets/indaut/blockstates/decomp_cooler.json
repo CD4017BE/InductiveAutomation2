@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:decompCooler" }
+		"normal": { "model": "indaut:decomp_cooler" }
 	}
 }

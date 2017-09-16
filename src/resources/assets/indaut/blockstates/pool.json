@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:pool" }
+		"normal": { "model": "indaut:pool" }
 	}
 }

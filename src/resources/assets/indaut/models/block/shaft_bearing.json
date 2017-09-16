@@ -1,7 +1,7 @@
 {
     "textures": {
-        "particle": "automation:blocks/pipes/shaftB",
-		"tex": "automation:blocks/pipes/shaftB"
+        "particle": "indaut:block/pipes/shaft_b",
+		"tex": "indaut:block/pipes/shaft_b"
     },
     "elements": [
         {   "from": [ 1, 1, 0 ],

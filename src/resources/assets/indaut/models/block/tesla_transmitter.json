@@ -1,10 +1,10 @@
 {
 	"parent": "block/block",
     "textures": {
-		"up": "automation:blocks/teslaTransmitter0",
-		"down": "automation:blocks/teslaTransmitter1",
-		"tex": "automation:blocks/teslaTransmitter2",
-        "particle": "automation:blocks/teslaTransmitter2"
+		"up": "indaut:block/tesla_transmitter0",
+		"down": "indaut:block/tesla_transmitter1",
+		"tex": "indaut:block/tesla_transmitter2",
+        "particle": "indaut:block/tesla_transmitter2"
     },
     "elements": [
         {   "from": [ 4, 0, 4 ],

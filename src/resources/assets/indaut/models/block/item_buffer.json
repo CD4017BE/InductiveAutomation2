@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/itemBuffer0",
-		"bot": "automation:blocks/itemBuffer0",
-		"front": "automation:blocks/itemBuffer0",
-		"back": "automation:blocks/itemBuffer0",
-		"left": "automation:blocks/itemBuffer0",
-		"right": "automation:blocks/itemBuffer0"
+		"top": "indaut:block/item_buffer0",
+		"bot": "indaut:block/item_buffer0",
+		"front": "indaut:block/item_buffer0",
+		"back": "indaut:block/item_buffer0",
+		"left": "indaut:block/item_buffer0",
+		"right": "indaut:block/item_buffer0"
 	}
 }

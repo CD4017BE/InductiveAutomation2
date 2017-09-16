@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:antimatter" }
+		"normal": { "model": "indaut:antimatter" }
 	}
 }

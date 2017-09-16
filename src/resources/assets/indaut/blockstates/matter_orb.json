@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:matterOrb" }
+		"normal": { "model": "indaut:matter_orb" }
 	}
 }

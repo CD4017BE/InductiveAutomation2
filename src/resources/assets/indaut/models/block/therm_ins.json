@@ -1,6 +1,6 @@
 {
-	"parent": "automation:block/CUBE",
+	"parent": "indaut:block/cube",
 	"textures": {
-		"tex": "automation:blocks/thermIns"
+		"tex": "indaut:block/therm_ins"
 	}
 }

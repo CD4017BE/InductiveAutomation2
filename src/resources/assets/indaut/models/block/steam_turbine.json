@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/steamTurbine0",
-		"bot": "automation:blocks/steamTurbine0",
-		"front": "automation:blocks/steamTurbine1",
-		"back": "automation:blocks/steamTurbine1",
-		"left": "automation:blocks/steamTurbine1",
-		"right": "automation:blocks/steamTurbine1"
+		"top": "indaut:block/steamturbine0",
+		"bot": "indaut:block/steamturbine0",
+		"front": "indaut:block/steamturbine1",
+		"back": "indaut:block/steamturbine1",
+		"left": "indaut:block/steamturbine1",
+		"right": "indaut:block/steamturbine1"
 	}
 }

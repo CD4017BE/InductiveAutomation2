@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/geothermalFurnace0",
-		"bot": "automation:blocks/geothermalFurnace1",
-		"front": "automation:blocks/geothermalFurnace2",
-		"back": "automation:blocks/geothermalFurnace3",
-		"left": "automation:blocks/geothermalFurnace3",
-		"right": "automation:blocks/geothermalFurnace3"
+		"top": "indaut:block/geothermal_furnace0",
+		"bot": "indaut:block/geothermal_furnace1",
+		"front": "indaut:block/geothermal_furnace2",
+		"back": "indaut:block/geothermal_furnace3",
+		"left": "indaut:block/geothermal_furnace3",
+		"right": "indaut:block/geothermal_furnace3"
 	}
 }

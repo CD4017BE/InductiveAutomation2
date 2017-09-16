@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/collector1",
-		"bot": "automation:blocks/collector1",
-		"front": "automation:blocks/collector0",
-		"back": "automation:blocks/collector1",
-		"left": "automation:blocks/collector1",
-		"right": "automation:blocks/collector1"
+		"top": "indaut:block/collector1",
+		"bot": "indaut:block/collector1",
+		"front": "indaut:block/collector0",
+		"back": "indaut:block/collector1",
+		"left": "indaut:block/collector1",
+		"right": "indaut:block/collector1"
 	}
 }

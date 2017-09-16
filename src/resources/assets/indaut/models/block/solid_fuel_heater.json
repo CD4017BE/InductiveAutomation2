@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/thermIns",
-		"bot": "automation:blocks/thermIns",
-		"front": "automation:blocks/furnaceHeater",
-		"back": "automation:blocks/thermCon",
-		"left": "automation:blocks/thermIns",
-		"right": "automation:blocks/thermIns"
+		"top": "indaut:block/therm_ins",
+		"bot": "indaut:block/therm_ins",
+		"front": "indaut:block/furnace_heater",
+		"back": "indaut:block/therm_con",
+		"left": "indaut:block/therm_ins",
+		"right": "indaut:block/therm_ins"
 	}
 }

@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:lavaCooler" }
+		"normal": { "model": "indaut:lava_cooler" }
 	}
 }

@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"orient=n": { "model": "automation:geothermalFurnace" },
-		"orient=e": { "model": "automation:geothermalFurnace" , "y": 90 },
-		"orient=s": { "model": "automation:geothermalFurnace" , "y": 180 },
-		"orient=w": { "model": "automation:geothermalFurnace" , "y": 270 }
+		"orient=n": { "model": "indaut:geothermal_furnace" },
+		"orient=e": { "model": "indaut:geothermal_furnace" , "y": 90 },
+		"orient=s": { "model": "indaut:geothermal_furnace" , "y": 180 },
+		"orient=w": { "model": "indaut:geothermal_furnace" , "y": 270 }
 	}
 }

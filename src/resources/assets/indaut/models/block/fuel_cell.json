@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/fuelCell0",
-		"bot": "automation:blocks/fuelCell1",
-		"front": "automation:blocks/fuelCell2",
-		"back": "automation:blocks/fuelCell2",
-		"left": "automation:blocks/fuelCell2",
-		"right": "automation:blocks/fuelCell2"
+		"top": "indaut:block/fuel_cell0",
+		"bot": "indaut:block/fuel_cell1",
+		"front": "indaut:block/fuel_cell2",
+		"back": "indaut:block/fuel_cell2",
+		"left": "indaut:block/fuel_cell2",
+		"right": "indaut:block/fuel_cell2"
 	}
 }

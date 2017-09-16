@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:builder" }
+		"normal": { "model": "indaut:builder" }
 	}
 }

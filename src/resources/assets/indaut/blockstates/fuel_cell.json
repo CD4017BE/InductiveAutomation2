@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:fuelCell" }
+		"normal": { "model": "indaut:fuel_cell" }
 	}
 }

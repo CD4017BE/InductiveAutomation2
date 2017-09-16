@@ -1,15 +1,15 @@
 {
 	"variants": {
-		"normal": { "model": "automation:warpPipe" },
-		"core0": { "model": "automation:warpPipe_core"},
-		"con0": { "model": "automation:warpPipe_con" },
-		"con1": { "model": "automation:itemPipeI_con" },
-		"con2": { "model": "automation:itemPipeE_con" },
-		"con3": { "model": "automation:liquidPipeI_con" },
-		"con4": { "model": "automation:liquidPipeE_con" },
-		"con5": { "model": "automation:itemPipeIF_con" },
-		"con6": { "model": "automation:itemPipeEF_con" },
-		"con7": { "model": "automation:liquidPipeIF_con" },
-		"con8": { "model": "automation:liquidPipeEF_con" }
+		"normal": { "model": "indaut:warp_pipe" },
+		"core0": { "model": "indaut:warp_pipe_core"},
+		"con0": { "model": "indaut:warp_pipe_con" },
+		"con1": { "model": "indaut:item_pipeI_con" },
+		"con2": { "model": "indaut:item_pipe_e_con" },
+		"con3": { "model": "indaut:liquid_pipe_i_con" },
+		"con4": { "model": "indaut:liquid_pipeE_con" },
+		"con5": { "model": "indaut:item_pipe_if_con" },
+		"con6": { "model": "indaut:item_pipe_ef_con" },
+		"con7": { "model": "indaut:liquid_pipeIF_con" },
+		"con8": { "model": "indaut:liquid_pipeEF_con" }
 	}
 }

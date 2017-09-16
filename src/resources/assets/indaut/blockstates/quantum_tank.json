@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:quantumTank" }
+		"normal": { "model": "indaut:quantum_tank" }
 	}
 }

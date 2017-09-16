@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/hpSolarpanel0",
-		"bot": "automation:blocks/hpSolarpanel1",
-		"front": "automation:blocks/hpSolarpanel2",
-		"back": "automation:blocks/hpSolarpanel2",
-		"left": "automation:blocks/hpSolarpanel2",
-		"right": "automation:blocks/hpSolarpanel2"
+		"top": "indaut:block/hp_solarpanel0",
+		"bot": "indaut:block/hp_solarpanel1",
+		"front": "indaut:block/hp_solarpanel2",
+		"back": "indaut:block/hp_solarpanel2",
+		"left": "indaut:block/hp_solarpanel2",
+		"right": "indaut:block/hp_solarpanel2"
 	}
 }

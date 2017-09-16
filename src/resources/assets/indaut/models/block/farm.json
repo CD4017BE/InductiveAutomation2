@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/farm0",
-		"bot": "automation:blocks/farm1",
-		"front": "automation:blocks/farm2",
-		"back": "automation:blocks/farm2",
-		"left": "automation:blocks/farm2",
-		"right": "automation:blocks/farm2"
+		"top": "indaut:block/farm0",
+		"bot": "indaut:block/farm1",
+		"front": "indaut:block/farm2",
+		"back": "indaut:block/farm2",
+		"left": "indaut:block/farm2",
+		"right": "indaut:block/farm2"
 	}
 }

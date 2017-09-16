@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/fluidVent1",
-		"bot": "automation:blocks/fluidVent1",
-		"front": "automation:blocks/fluidVent0",
-		"back": "automation:blocks/fluidVent1",
-		"left": "automation:blocks/fluidVent1",
-		"right": "automation:blocks/fluidVent1"
+		"top": "indaut:block/fluid_vent1",
+		"bot": "indaut:block/fluid_vent1",
+		"front": "indaut:block/fluid_vent0",
+		"back": "indaut:block/fluid_vent1",
+		"left": "indaut:block/fluid_vent1",
+		"right": "indaut:block/fluid_vent1"
 	}
 }

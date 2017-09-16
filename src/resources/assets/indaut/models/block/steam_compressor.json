@@ -1,11 +1,11 @@
 {
-	"parent": "automation:block/base",
+	"parent": "indaut:block/base",
 	"textures": {
-		"top": "automation:blocks/steamCompressor0",
-		"bot": "automation:blocks/steamCompressor1",
-		"front": "automation:blocks/steamCompressor2",
-		"back": "automation:blocks/steamCompressor3",
-		"left": "automation:blocks/steamCompressor3",
-		"right": "automation:blocks/steamCompressor3"
+		"top": "indaut:block/steam_compressor0",
+		"bot": "indaut:block/steam_compressor1",
+		"front": "indaut:block/steam_compressor2",
+		"back": "indaut:block/steam_compressor3",
+		"left": "indaut:block/steam_compressor3",
+		"right": "indaut:block/steam_compressor3"
 	}
 }

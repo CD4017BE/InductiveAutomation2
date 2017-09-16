@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:texMaker" }
+		"normal": { "model": "indaut:tex_maker" }
 	}
 }

@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "automation:heatRadiator" }
+		"normal": { "model": "indaut:heat_radiator" }
 	}
 }
