@@ -1,3 +1,1 @@
-automation:=indaut:
-blocks/=block/
-items/=item/
+liquid_pipe=fluid_pipe

@@ -1,7 +1,12 @@
 {
 	"variants": {
 		"normal": { "model": "indaut:wire_h" },
-		"core0": { "model": "indaut:wire_h_core" },
-		"con0": { "model": "indaut:wire_h_con" }
+		"base": { "model": "indaut:wire_h_core" },
+		"cn0": { "model": "indaut:wire_h_con" },
+		"ce0": { "model": "indaut:wire_h_con" , "y": 90 },
+		"cs0": { "model": "indaut:wire_h_con" , "y": 180 },
+		"cw0": { "model": "indaut:wire_h_con" , "y": 270 },
+		"cb0": { "model": "indaut:wire_h_con" , "x": 90 },
+		"ct0": { "model": "indaut:wire_h_con" , "x": 270 }
 	}
 }
