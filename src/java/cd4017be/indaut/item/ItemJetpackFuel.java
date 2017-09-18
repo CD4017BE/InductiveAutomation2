@@ -6,7 +6,6 @@ import cd4017be.indaut.Config;
 import cd4017be.indaut.Objects;
 import cd4017be.lib.DefaultItem;
 import cd4017be.lib.util.TooltipUtil;
-import cd4017be.lib.util.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;

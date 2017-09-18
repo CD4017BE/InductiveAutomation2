@@ -1,11 +1,13 @@
 package cd4017be.indaut.item;
 
+import java.io.IOException;
 import java.util.List;
 
 import cd4017be.api.automation.AreaProtect;
 import cd4017be.indaut.Config;
 import cd4017be.indaut.render.gui.GuiPortableTeleporter;
 import cd4017be.lib.BlockGuiHandler;
+import cd4017be.lib.BlockGuiHandler.ClientItemPacketReceiver;
 import cd4017be.lib.IGuiItem;
 import cd4017be.lib.MovedBlock;
 import cd4017be.lib.Gui.DataContainer;
@@ -34,7 +36,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import cd4017be.api.energy.EnergyAutomation.EnergyItem;
 
-public class ItemPortableTeleporter extends ItemEnergyCell implements IGuiItem {
+public class ItemPortableTeleporter extends ItemEnergyCell implements IGuiItem, ClientItemPacketReceiver {
 
 	public static float energyUse = 8.0F;
 
@@ -50,18 +52,18 @@ public class ItemPortableTeleporter extends ItemEnergyCell implements IGuiItem {
 	}
 
 	@Override
-	public Container getContainer(World world, EntityPlayer player, int x, int y, int z) {
+	public Container getContainer(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new DataContainer(new ItemGuiData(this), player);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public GuiContainer getGui(World world, EntityPlayer player, int x, int y, int z) {
+	public GuiContainer getGui(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new GuiPortableTeleporter(new DataContainer(new ItemGuiData(this), player));
 	}
 
 	@Override
-	public void onPlayerCommand(ItemStack item, EntityPlayer player, PacketBuffer dis) {
+	public void onPacketFromClient(PacketBuffer dis, EntityPlayer player, ItemStack item, int slot) throws IOException {
 		if (item.getTagCompound() == null) item.setTagCompound(new NBTTagCompound());
 		NBTTagList points = item.getTagCompound().getTagList("points", 10);
 		NBTTagCompound tag;
@@ -133,7 +135,7 @@ public class ItemPortableTeleporter extends ItemEnergyCell implements IGuiItem {
 				player.sendMessage(new TextComponentString("Destination obscured!"));
 			}
 		} else {
-			BlockGuiHandler.openItemGui(player, world, 0, -1, 0);
+			BlockGuiHandler.openItemGui(player, hand);
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}

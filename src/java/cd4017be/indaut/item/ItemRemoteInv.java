@@ -1,8 +1,11 @@
 package cd4017be.indaut.item;
 
+import java.io.IOException;
+
 import cd4017be.indaut.Objects;
 import cd4017be.indaut.render.gui.GuiRemoteInventory;
 import cd4017be.lib.BlockGuiHandler;
+import cd4017be.lib.BlockGuiHandler.ClientItemPacketReceiver;
 import cd4017be.lib.DefaultItem;
 import cd4017be.lib.IGuiItem;
 import cd4017be.lib.Gui.DataContainer;
@@ -39,7 +42,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
-public class ItemRemoteInv extends DefaultItem implements IGuiItem, IItemInventory {
+public class ItemRemoteInv extends DefaultItem implements IGuiItem, ClientItemPacketReceiver, IItemInventory {
 
 	public ItemRemoteInv(String id) {
 		super(id);
@@ -47,18 +50,18 @@ public class ItemRemoteInv extends DefaultItem implements IGuiItem, IItemInvento
 	}
 
 	@Override
-	public Container getContainer(World world, EntityPlayer player, int x, int y, int z) {
+	public Container getContainer(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new TileContainer(new GuiData(), player);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public GuiContainer getGui(World world, EntityPlayer player, int x, int y, int z) {
+	public GuiContainer getGui(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new GuiRemoteInventory(new TileContainer(new GuiData(), player));
 	}
 
 	@Override
-	public void onPlayerCommand(ItemStack item, EntityPlayer player, PacketBuffer dis) {
+	public void onPacketFromClient(PacketBuffer dis, EntityPlayer player, ItemStack item, int slot) throws IOException {
 		byte cmd = dis.readByte();
 		if (cmd >= 0 && cmd < 2) {
 			String name = cmd == 0 ? "fin" : "fout";
@@ -71,9 +74,9 @@ public class ItemRemoteInv extends DefaultItem implements IGuiItem, IItemInvento
 				ItemGuiData.updateInventory(player, player.inventory.currentItem);
 			}
 		} else if (cmd == 2 && player.openContainer != null) {//set all reference ItemStacks to null, so the server thinks they changed and sends the data again.
-			for (Slot slot : player.openContainer.inventorySlots)
-				if (slot instanceof GlitchSaveSlot)
-					player.openContainer.inventoryItemStacks.set(slot.slotNumber, null);
+			for (Slot s : player.openContainer.inventorySlots)
+				if (s instanceof GlitchSaveSlot)
+					player.openContainer.inventoryItemStacks.set(s.slotNumber, null);
 		}
 	}
 
@@ -103,7 +106,7 @@ public class ItemRemoteInv extends DefaultItem implements IGuiItem, IItemInvento
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack item = player.getHeldItem(hand);
-		if (!player.isSneaking() && !world.isRemote) BlockGuiHandler.openItemGui(player, world, 0, -1, 0);
+		if (!player.isSneaking() && !world.isRemote) BlockGuiHandler.openItemGui(player, hand);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 

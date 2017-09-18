@@ -1,5 +1,6 @@
 package cd4017be.indaut.item;
 
+import java.io.IOException;
 import java.util.List;
 
 import net.minecraftforge.fml.relauncher.Side;
@@ -9,6 +10,7 @@ import cd4017be.api.automation.IOperatingArea;
 import cd4017be.indaut.Objects;
 import cd4017be.indaut.render.gui.GuiAreaUpgrade;
 import cd4017be.lib.BlockGuiHandler;
+import cd4017be.lib.BlockGuiHandler.ClientItemPacketReceiver;
 import cd4017be.lib.BlockItemRegistry;
 import cd4017be.lib.DefaultItem;
 import cd4017be.lib.IGuiItem;
@@ -30,6 +32,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumFacing.AxisDirection;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
@@ -37,7 +40,7 @@ import net.minecraft.world.World;
  *
  * @author CD4017BE
  */
-public class ItemSelectionTool extends DefaultItem implements IGuiItem {
+public class ItemSelectionTool extends DefaultItem implements IGuiItem, ClientItemPacketReceiver {
 
 	public ItemSelectionTool(String id) {
 		super(id);
@@ -48,25 +51,25 @@ public class ItemSelectionTool extends DefaultItem implements IGuiItem {
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing s, float X, float Y, float Z) {
 		ItemStack stack = player.getHeldItem(hand);
-		if (!world.isRemote) onClick(stack, player, true, pos);
+		if (!world.isRemote) onClick(stack, player, hand, true, pos);
 		return EnumActionResult.SUCCESS;
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack item = player.getHeldItem(hand);
-		if (!world.isRemote) onClick(item, player, false, new BlockPos(player.posX, player.posY, player.posZ));
+		if (!world.isRemote) onClick(item, player, hand, false, new BlockPos(player.posX, player.posY, player.posZ));
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 
-	private void onClick(ItemStack item, EntityPlayer player, boolean b, BlockPos pos) {
+	private void onClick(ItemStack item, EntityPlayer player, EnumHand hand, boolean b, BlockPos pos) {
 		if (!item.hasTagCompound()) item.setTagCompound(new NBTTagCompound());
 		int mode = item.getItemDamage();
 		if (player.isSneaking()) {
 			if (b) {
 				TileEntity te = player.world.getTileEntity(pos);
 				if (mode == 5 && te != null && te instanceof IOperatingArea) {
-					BlockGuiHandler.openItemGui(player, player.world, pos.getX(), pos.getY(), pos.getZ());
+					BlockGuiHandler.openGui(player, player.world, pos, hand == EnumHand.MAIN_HAND ? player.inventory.currentItem : 40);
 					return;
 				} else if (item.getTagCompound().getInteger("mx") == pos.getX() && item.getTagCompound().getInteger("my") == pos.getY()
 					&& item.getTagCompound().getInteger("mz") == pos.getZ() && te != null && te instanceof IOperatingArea) {
@@ -106,30 +109,35 @@ public class ItemSelectionTool extends DefaultItem implements IGuiItem {
 			if (pos.getZ() >= area[5]) area[5] = pos.getZ() + 1;
 			msg = "Point added: X=" + pos.getX() + " Y=" + pos.getY() + " Z=" + pos.getZ();
 		} else if (mode < 5) {
-			byte look = Utils.getLookDir(player);
+			EnumFacing look = Utils.getLookDirStrict(player);
 			if (mode == 4) {
-				int d = look >> 1;
-				int o = (look & 1) == 1 ? -1 : 1;
-				if (d == 0){area[1] += o; area[4] += o;}
-				else if (d == 1){area[2] += o; area[5] += o;}
-				else if (d == 2){area[0] += o; area[3] += o;}
+				int o = look.getAxisDirection() == AxisDirection.NEGATIVE ? -1 : 1;
+				switch(look.getAxis()) {
+				case X: area[0] += o; area[3] += o; break;
+				case Y: area[1] += o; area[4] += o; break;
+				case Z: area[2] += o; area[5] += o; break;
+				}
 			} else if (mode == 2) {
-				if (look == 1) area[1]--;
-				else if (look == 0) area[4]++;
-				else if (look == 3) area[2]--;
-				else if (look == 2) area[5]++;
-				else if (look == 5) area[0]--;
-				else if (look == 4) area[3]++;
+				switch(look) {
+				case DOWN: area[1]--; break;
+				case UP: area[4]++; break;
+				case NORTH: area[2]--; break;
+				case SOUTH: area[5]++; break;
+				case EAST: area[3]++; break;
+				case WEST: area[0]--; break;
+				}
 			} else if (mode == 3) {
-				if (look == 1 && area[1] < area[4]) area[1]++;
-				else if (look == 0 && area[1] < area[4]) area[4]--;
-				else if (look == 3 && area[2] < area[5]) area[2]++;
-				else if (look == 2 && area[2] < area[5]) area[5]--;
-				else if (look == 5 && area[0] < area[3]) area[0]++;
-				else if (look == 4 && area[0] < area[3]) area[3]--;
+				switch(look) {
+				case DOWN: if (area[1] < area[4]) area[1]++; break;
+				case UP: if (area[1] < area[4]) area[4]--; break;
+				case NORTH: if (area[2] < area[5]) area[2]++; break;
+				case SOUTH: if (area[2] < area[5]) area[5]--; break;
+				case EAST: if (area[0] < area[3]) area[0]++; break;
+				case WEST: if (area[0] < area[3]) area[3]--; break;
+				}
 			}
 		} else if (mach != null) {
-			BlockGuiHandler.openItemGui(player, player.world, 0, -1, 0);
+			BlockGuiHandler.openItemGui(player, hand);
 			return;
 		}
 		if (mach != null) {
@@ -160,10 +168,8 @@ public class ItemSelectionTool extends DefaultItem implements IGuiItem {
 	}
 
 	@Override
-	public Container getContainer(World world, EntityPlayer player, int x, int y, int z) {
-		ItemStack item = player.inventory.mainInventory.get(player.inventory.currentItem);
+	public Container getContainer(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		if (!item.hasTagCompound()) return null;
-		BlockPos pos = new BlockPos(x, y, z);
 		TileEntity te = world.getTileEntity(pos);
 		if (te == null || !(te instanceof IOperatingArea)) {
 			te = world.getTileEntity(pos = new BlockPos(item.getTagCompound().getInteger("mx"), item.getTagCompound().getInteger("my"), item.getTagCompound().getInteger("mz")));
@@ -174,13 +180,13 @@ public class ItemSelectionTool extends DefaultItem implements IGuiItem {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public GuiContainer getGui(World world, EntityPlayer player, int x, int y, int z) {
-		Container c = this.getContainer(world, player, x, y, z);
+	public GuiContainer getGui(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
+		Container c = getContainer(item, player, world, pos, slot);
 		return c != null ? new GuiAreaUpgrade((TileContainer)c) : null;
 	}
 
 	@Override
-	public void onPlayerCommand(ItemStack item, EntityPlayer player, PacketBuffer dis) {
+	public void onPacketFromClient(PacketBuffer dis, EntityPlayer player, ItemStack item, int slot) throws IOException {
 		TileContainer cont;
 		if (player.openContainer != null && player.openContainer instanceof TileContainer && (cont = (TileContainer)player.openContainer).data instanceof GuiData) {
 			GuiData data = (GuiData)cont.data;

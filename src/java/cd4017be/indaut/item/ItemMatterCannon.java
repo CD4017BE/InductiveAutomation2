@@ -1,5 +1,6 @@
 package cd4017be.indaut.item;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import cd4017be.api.automation.MatterOrbItemHandler;
 import cd4017be.api.automation.MatterOrbItemHandler.IMatterOrb;
 import cd4017be.indaut.Config;
 import cd4017be.lib.BlockGuiHandler;
+import cd4017be.lib.BlockGuiHandler.ClientItemPacketReceiver;
 import cd4017be.lib.ClientInputHandler.IScrollHandlerItem;
 import cd4017be.lib.IGuiItem;
 import cd4017be.lib.util.Utils;
@@ -36,7 +38,7 @@ import cd4017be.api.energy.EnergyAutomation.EnergyItem;
  *
  * @author CD4017BE
  */
-public class ItemMatterCannon extends ItemEnergyCell implements IMatterOrb, IGuiItem, IScrollHandlerItem {
+public class ItemMatterCannon extends ItemEnergyCell implements IMatterOrb, IGuiItem, ClientItemPacketReceiver, IScrollHandlerItem {
 
 	public static int EnergyUsage = 16;
 
@@ -207,17 +209,17 @@ public class ItemMatterCannon extends ItemEnergyCell implements IMatterOrb, IGui
 	}
 
 	@Override
-	public Container getContainer(World world, EntityPlayer player, int x, int y, int z) {
+	public Container getContainer(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return null;
 	}
 
 	@Override
-	public GuiContainer getGui(World world, EntityPlayer player, int x, int y, int z) {
+	public GuiContainer getGui(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return null;
 	}
 
 	@Override
-	public void onPlayerCommand(ItemStack item, EntityPlayer player, PacketBuffer dis) {
+	public void onPacketFromClient(PacketBuffer dis, EntityPlayer player, ItemStack item, int slot) throws IOException {
 		byte cmd = dis.readByte();
 		int n = MatterOrbItemHandler.getUsedTypes(item);
 		if (cmd == 1 && n > 0) {

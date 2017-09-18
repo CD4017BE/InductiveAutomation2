@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import cd4017be.indaut.render.gui.GuiPortableCrafting;
 import cd4017be.lib.BlockGuiHandler;
+import cd4017be.lib.BlockGuiHandler.ClientItemPacketReceiver;
 import cd4017be.lib.DefaultItem;
 import cd4017be.lib.IGuiItem;
 import cd4017be.lib.Gui.DataContainer;
@@ -30,9 +31,10 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemPortableCrafter extends DefaultItem implements IGuiItem, IItemInventory {
+public class ItemPortableCrafter extends DefaultItem implements IGuiItem, ClientItemPacketReceiver, IItemInventory {
 
 	public ItemPortableCrafter(String id) {
 		super(id);
@@ -40,18 +42,18 @@ public class ItemPortableCrafter extends DefaultItem implements IGuiItem, IItemI
 	}
 
 	@Override
-	public Container getContainer(World world, EntityPlayer player, int x, int y, int z) {
+	public Container getContainer(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new TileContainer(new GuiData(), player);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public GuiContainer getGui(World world, EntityPlayer player, int x, int y, int z) {
+	public GuiContainer getGui(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new GuiPortableCrafting(new TileContainer(new GuiData(), player));
 	}
 
 	@Override
-	public void onPlayerCommand(ItemStack item, EntityPlayer player, PacketBuffer dis) {
+	public void onPacketFromClient(PacketBuffer dis, EntityPlayer player, ItemStack item, int slot) throws IOException {
 		if (item == null || item.getItem() != this) return;
 		if (item.getTagCompound() == null) item.setTagCompound(new NBTTagCompound());
 		byte cmd = dis.readByte();
@@ -86,7 +88,7 @@ public class ItemPortableCrafter extends DefaultItem implements IGuiItem, IItemI
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack item = player.getHeldItem(hand);
-		BlockGuiHandler.openItemGui(player, world, 0, -1, 0);
+		BlockGuiHandler.openItemGui(player, hand);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 

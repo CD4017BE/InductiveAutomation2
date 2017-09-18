@@ -2,10 +2,14 @@ package cd4017be.indaut.item;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.io.IOException;
+
 import cd4017be.api.automation.MatterOrbItemHandler;
 import cd4017be.api.automation.MatterOrbItemHandler.Access;
 import cd4017be.indaut.render.gui.GuiItemMatterInterface;
 import cd4017be.lib.BlockGuiHandler;
+import cd4017be.lib.BlockGuiHandler.ClientItemPacketReceiver;
 import cd4017be.lib.DefaultItem;
 import cd4017be.lib.IGuiItem;
 import cd4017be.lib.Gui.DataContainer;
@@ -28,7 +32,7 @@ import net.minecraft.world.World;
  *
  * @author CD4017BE
  */
-public class ItemMatterInterface extends DefaultItem implements IGuiItem {
+public class ItemMatterInterface extends DefaultItem implements IGuiItem, ClientItemPacketReceiver {
 
 	public ItemMatterInterface(String id) {
 		super(id);
@@ -37,29 +41,29 @@ public class ItemMatterInterface extends DefaultItem implements IGuiItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack item = player.getHeldItem(hand);
-		BlockGuiHandler.openItemGui(player, world, 0, -1, 0);
+		BlockGuiHandler.openItemGui(player, hand);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float X, float Y, float Z) {
-		BlockGuiHandler.openItemGui(player, world, pos.getX(), pos.getY(), pos.getZ());
+		BlockGuiHandler.openGui(player, world, pos, hand == EnumHand.MAIN_HAND ? player.inventory.currentItem : 40);
 		return EnumActionResult.SUCCESS;
 	}
 
 	@Override
-	public Container getContainer(World world, EntityPlayer player, int x, int y, int z) {
+	public Container getContainer(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new TileContainer(new GuiData(), player);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public GuiContainer getGui(World world, EntityPlayer player, int x, int y, int z) {
+	public GuiContainer getGui(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new GuiItemMatterInterface(new GuiData(), player);
 	}
 
 	@Override
-	public void onPlayerCommand(ItemStack item, EntityPlayer player, PacketBuffer dis) {
+	public void onPacketFromClient(PacketBuffer dis, EntityPlayer player, ItemStack item, int slot) throws IOException {
 		if (player.openContainer instanceof TileContainer && ((TileContainer)player.openContainer).data instanceof GuiData) {
 			Access inv = ((GuiData)((TileContainer)player.openContainer).data).inv;
 			byte cmd = dis.readByte();

@@ -1,5 +1,6 @@
 package cd4017be.indaut.item;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import net.minecraft.world.World;
 import cd4017be.indaut.render.gui.GuiPlacement;
 import cd4017be.indaut.render.gui.InventoryPlacement;
 import cd4017be.lib.BlockGuiHandler;
+import cd4017be.lib.BlockGuiHandler.ClientItemPacketReceiver;
 import cd4017be.lib.DefaultItem;
 import cd4017be.lib.IGuiItem;
 import cd4017be.lib.Gui.DataContainer;
@@ -32,7 +34,7 @@ import cd4017be.lib.templates.InventoryItem;
 import cd4017be.lib.templates.InventoryItem.IItemInventory;
 import cd4017be.lib.util.ItemFluidUtil;
 
-public class ItemPlacement extends DefaultItem implements IGuiItem, IItemInventory {
+public class ItemPlacement extends DefaultItem implements IGuiItem, ClientItemPacketReceiver, IItemInventory {
 
 	public ItemPlacement(String id) {
 		super(id);
@@ -51,7 +53,7 @@ public class ItemPlacement extends DefaultItem implements IGuiItem, IItemInvento
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack item = player.getHeldItem(hand);
-		BlockGuiHandler.openItemGui(player, world, 0, -1, 0);
+		BlockGuiHandler.openItemGui(player, hand);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 
@@ -83,18 +85,18 @@ public class ItemPlacement extends DefaultItem implements IGuiItem, IItemInvento
 	}
 
 	@Override
-	public Container getContainer(World world, EntityPlayer player, int x, int y, int z) {
+	public Container getContainer(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new TileContainer(new GuiData(), player);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public GuiContainer getGui(World world, EntityPlayer player, int x, int y, int z) {
+	public GuiContainer getGui(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new GuiPlacement(new TileContainer(new GuiData(), player));
 	}
 
 	@Override
-	public void onPlayerCommand(ItemStack item, EntityPlayer player, PacketBuffer dis) {
+	public void onPacketFromClient(PacketBuffer dis, EntityPlayer player, ItemStack item, int slot) throws IOException {
 		NBTTagCompound nbt;
 		if (item.hasTagCompound()) nbt = item.getTagCompound();
 		else item.setTagCompound(nbt = new NBTTagCompound());

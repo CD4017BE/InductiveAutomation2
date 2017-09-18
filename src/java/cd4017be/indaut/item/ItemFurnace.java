@@ -10,6 +10,7 @@ import cd4017be.indaut.Config;
 import cd4017be.indaut.Objects;
 import cd4017be.indaut.render.gui.GuiPortableFurnace;
 import cd4017be.lib.BlockGuiHandler;
+import cd4017be.lib.BlockGuiHandler.ClientItemPacketReceiver;
 import cd4017be.lib.IGuiItem;
 import cd4017be.lib.Gui.DataContainer;
 import cd4017be.lib.Gui.ItemGuiData;
@@ -28,9 +29,10 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemFurnace extends ItemFilteredSubInventory implements IEnergyItem, IItemStorage, IGuiItem {
+public class ItemFurnace extends ItemFilteredSubInventory implements IEnergyItem, IItemStorage, IGuiItem, ClientItemPacketReceiver {
 
 	public static int energyUse = 200;
 
@@ -63,18 +65,18 @@ public class ItemFurnace extends ItemFilteredSubInventory implements IEnergyItem
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack item = player.getHeldItem(hand);
-		BlockGuiHandler.openItemGui(player, world, 0, -1, 0);
+		BlockGuiHandler.openItemGui(player, hand);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 
 	@Override
-	public Container getContainer(World world, EntityPlayer player, int x, int y, int z) {
+	public Container getContainer(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new TileContainer(new GuiData(), player);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public GuiContainer getGui(World world, EntityPlayer player, int x, int y, int z) {
+	public GuiContainer getGui(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new GuiPortableFurnace(new TileContainer(new GuiData(), player));
 	}
 

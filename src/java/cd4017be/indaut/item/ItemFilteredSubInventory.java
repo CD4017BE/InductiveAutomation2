@@ -1,10 +1,12 @@
 package cd4017be.indaut.item;
 
+import java.io.IOException;
 import java.util.List;
 
 import cd4017be.api.automation.InventoryItemHandler;
 import cd4017be.api.automation.InventoryItemHandler.IItemStorage;
 import cd4017be.indaut.Objects;
+import cd4017be.lib.BlockGuiHandler.ClientItemPacketReceiver;
 import cd4017be.lib.DefaultItem;
 import cd4017be.lib.IGuiItem;
 import cd4017be.lib.Gui.ItemGuiData;
@@ -21,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public abstract class ItemFilteredSubInventory extends DefaultItem implements IItemStorage, IGuiItem {
+public abstract class ItemFilteredSubInventory extends DefaultItem implements IItemStorage, IGuiItem, ClientItemPacketReceiver {
 
 	public ItemFilteredSubInventory(String id) {
 		super(id);
@@ -143,7 +145,7 @@ public abstract class ItemFilteredSubInventory extends DefaultItem implements II
 	}
 
 	@Override
-	public void onPlayerCommand(ItemStack item, EntityPlayer player, PacketBuffer dis) {
+	public void onPacketFromClient(PacketBuffer dis, EntityPlayer player, ItemStack item, int slot) throws IOException {
 		byte cmd = dis.readByte();
 		if (cmd >= 0 && cmd < 2) {
 			String name = cmd == 0 ? "fin" : "fout";

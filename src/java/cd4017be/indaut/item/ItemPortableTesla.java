@@ -12,12 +12,17 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.io.IOException;
+
 import cd4017be.api.automation.TeslaNetwork;
 import cd4017be.api.energy.EnergyAPI;
 import cd4017be.indaut.Config;
 import cd4017be.indaut.render.gui.GuiPortableTesla;
 import cd4017be.lib.BlockGuiHandler;
+import cd4017be.lib.BlockGuiHandler.ClientItemPacketReceiver;
 import cd4017be.lib.DefaultItem;
 import cd4017be.lib.IGuiItem;
 import cd4017be.lib.Gui.DataContainer;
@@ -26,7 +31,7 @@ import cd4017be.lib.Gui.TileContainer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemPortableTesla extends DefaultItem implements IGuiItem {
+public class ItemPortableTesla extends DefaultItem implements IGuiItem, ClientItemPacketReceiver {
 
 	public ItemPortableTesla(String id) {
 		super(id);
@@ -39,18 +44,18 @@ public class ItemPortableTesla extends DefaultItem implements IGuiItem {
 	}
 
 	@Override
-	public Container getContainer(World world, EntityPlayer player, int x, int y, int z) {
+	public Container getContainer(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new TileContainer(new GuiData(), player);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public GuiContainer getGui(World world, EntityPlayer player, int x, int y, int z) {
+	public GuiContainer getGui(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new GuiPortableTesla(new TileContainer(new GuiData(), player));
 	}
 
 	@Override
-	public void onPlayerCommand(ItemStack item, EntityPlayer player, PacketBuffer dis) {
+	public void onPacketFromClient(PacketBuffer dis, EntityPlayer player, ItemStack item, int slot) throws IOException {
 		if (item.getTagCompound() == null) item.setTagCompound(new NBTTagCompound());
 		byte cmd = dis.readByte();
 		if (cmd == 0) item.getTagCompound().setShort("mode", dis.readShort());
@@ -60,7 +65,7 @@ public class ItemPortableTesla extends DefaultItem implements IGuiItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack item = player.getHeldItem(hand);
-		BlockGuiHandler.openItemGui(player, world, 0, -1, 0);
+		BlockGuiHandler.openItemGui(player, hand);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 

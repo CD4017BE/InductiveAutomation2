@@ -1,5 +1,6 @@
 package cd4017be.indaut.item;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import cd4017be.indaut.Objects;
 import cd4017be.indaut.render.gui.GuiAMLEnchant;
 import cd4017be.lib.ClientInputHandler.IScrollHandlerItem;
 import cd4017be.lib.BlockGuiHandler;
+import cd4017be.lib.BlockGuiHandler.ClientItemPacketReceiver;
 import cd4017be.lib.IGuiItem;
 import cd4017be.lib.Gui.DataContainer;
 import cd4017be.lib.Gui.ItemGuiData;
@@ -25,6 +27,7 @@ import cd4017be.lib.Gui.TileContainer;
 import cd4017be.lib.templates.InventoryItem;
 import cd4017be.lib.templates.InventoryItem.IItemInventory;
 import cd4017be.lib.templates.SingleFluidItemHandler;
+import cd4017be.lib.util.Utils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.enchantment.Enchantment;
@@ -58,7 +61,7 @@ import net.minecraft.world.World;
  *
  * @author CD4017BE
  */
-public class ItemAntimatterLaser extends ItemEnergyCell implements IAntimatterItem, IMatterOrb, IGuiItem, IScrollHandlerItem, IItemInventory {
+public class ItemAntimatterLaser extends ItemEnergyCell implements IAntimatterItem, IMatterOrb, IGuiItem, ClientItemPacketReceiver, IScrollHandlerItem, IItemInventory {
 
 	public static int EnergyUsage = 16;
 	public static float AmUsage = 1F;
@@ -295,25 +298,25 @@ public class ItemAntimatterLaser extends ItemEnergyCell implements IAntimatterIt
 	}
 
 	@Override
-	public Container getContainer(World world, EntityPlayer player, int x, int y, int z) {
+	public Container getContainer(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new TileContainer(new GuiData(), player);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public GuiContainer getGui(World world, EntityPlayer player, int x, int y, int z) {
+	public GuiContainer getGui(ItemStack item, EntityPlayer player, World world, BlockPos pos, int slot) {
 		return new GuiAMLEnchant(new TileContainer(new GuiData(), player));
 	}
 
 	@Override
-	public void onPlayerCommand(ItemStack item, EntityPlayer player, PacketBuffer dis) {
+	public void onPacketFromClient(PacketBuffer dis, EntityPlayer player, ItemStack item, int slot) throws IOException {
 		byte cmd = dis.readByte();
 		if (cmd == 0) {
 			item.getTagCompound().setByte("mode", (byte)((item.getTagCompound().getByte("mode") - 1 + modes.length) % modes.length));
 		} else if (cmd == 1) {
 			item.getTagCompound().setByte("mode", (byte)((item.getTagCompound().getByte("mode") + 1) % modes.length));
 		} else if (cmd == 2) {
-			BlockGuiHandler.openItemGui(player, player.world, 0, -1, 0);
+			BlockGuiHandler.openGui(player, player.world, Utils.NOWHERE, slot);
 		}
 	}
 
